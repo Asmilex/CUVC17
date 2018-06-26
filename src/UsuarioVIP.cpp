@@ -1,8 +1,23 @@
-#include <time.h>
-#include "include/UsuarioVIP.h"
+#include "UsuarioVIP.h"
 
 using namespace std;
-	UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, Fecha limit){
+
+    UsuarioVIP::UsuarioVIP(std::string name, int suscripcion):
+    _nombre(name),
+    _tipo_suscripcion(suscripcion)
+    {
+        tm *tmp;
+        time_t fecha;
+        time(&fecha);
+        tmp = localtime(&fecha);
+        if(suscripcion == 1){
+            this->_limite.tm_mday = tmp->tm_mday;
+            this->_limite.tm_mon = tmp->tm_mon +2;
+            this->_limite.tm_year = tmp->tm_year +1900;
+        }
+    }
+
+    UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, tm limit){
 
 
     }
@@ -12,7 +27,7 @@ using namespace std;
         return this->_nombre;
     }
 
-	Fecha UsuarioVIP::GetFechaLimite() const{
+	tm UsuarioVIP::GetFechaLimite() const{
         return this->_limite;
     }
 
@@ -33,7 +48,7 @@ using namespace std;
 
 
     }
-    void UsuarioVIP::setFechaLimite(Fecha fecha){
+    void UsuarioVIP::setFechaLimite(tm fecha){
 
 
     }
