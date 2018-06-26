@@ -11,21 +11,21 @@ struct Fecha{
 	int dia;
 };
 
-class Usuario{
+class UsuarioVIP{
 private:
 	std::string _nombre;
 	int _tipo_suscripcion;
 	Fecha _limite;
 
 public:
-	Usuario();
-	Usuario(std::string name, int suscripcion, Fecha limit);
-	Usuario(std::string name, int suscripcion);
+	UsuarioVIP();
+	UsuarioVIP(std::string name, int suscripcion, Fecha limit);
+	UsuarioVIP(std::string name, int suscripcion);
 
 	////////////////////////////////////////////////////////////////////
 	/**
-	 * @brief: Devuelve el nombre del usuario
-	 * @return: nombre del usuario
+	 * @brief: Devuelve el nombre del UsuarioVIP
+	 * @return: nombre del UsuarioVIP
 	 */
 	std::string GetName() const;
 	/**
@@ -34,14 +34,14 @@ public:
 	 */
 	Fecha GetFechaLimite() const;
 	/**
-	 * @brief: Devuelve el tipo de suscripción que tiene el usuario
-	 * @return: meses que contrató el usuario
+	 * @brief: Devuelve el tipo de suscripción que tiene el UsuarioVIP
+	 * @return: meses que contrató el UsuarioVIP
 	 */
 	int GetTipoSuscripcion() const;
 
 	////////////////////////////////////////////////////////////////////
 	/**
-	 * @brief: modifica el nombre de usuario
+	 * @brief: modifica el nombre de UsuarioVIP
 	 */
 	void setName();
 	
@@ -65,9 +65,9 @@ public:
 
 
 /**
- * @brief: Añade un usuario a la lista de activos
+ * @brief: Añade un UsuarioVIP a la lista de activos
  * @return: true si ha funcionado, else false
  */
-bool AnadirUsuario(Usuario *& VIPs);
+bool AnadirUsuarioVIP(UsuarioVIP *& VIPs);
 
 #endif
