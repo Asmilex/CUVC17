@@ -57,3 +57,12 @@ using namespace std;
 
 
     }
+
+    bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, std::string usuario){
+
+
+    }
+    void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension){
+
+        
+    }

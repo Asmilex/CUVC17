@@ -60,7 +60,6 @@ public:
 	 * @brief: mejora la suscripcion y actualiza la fecha límite
 	 */
 	void ActualizarSuscripcion(int suscription);
-
 };
 
 
@@ -69,5 +68,15 @@ public:
  * @return: true si ha funcionado, else false
  */
 bool AnadirUsuarioVIP(UsuarioVIP *& VIPs);
+
+/**
+ * @brief: Elimina un UsuarioVIP a la lista de activos
+ * @return: true si ha funcionado, else false
+ */
+bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, std::string usuario);
+/**
+ * 
+ */
+void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension);
 
 #endif
