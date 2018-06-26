@@ -2,23 +2,20 @@
 #define VIP_C17
 
 #include <string>
+#include <ctime>
 
 using namespace std;
 
-struct Fecha{
-	int ano;
-	int mes;
-	int dia;
-};
 
 class UsuarioVIP{
 private:
 	std::string _nombre;
 	int _tipo_suscripcion;
-	Fecha _limite;
+	tm _limite;
 
 public:
-	UsuarioVIP(std::string name, int suscripcion, Fecha limit);
+        UsuarioVIP(std::string name="", int suscripcion=0);
+	UsuarioVIP(std::string name, int suscripcion, tm limit);
 
 	////////////////////////////////////////////////////////////////////
 	/**
@@ -30,7 +27,7 @@ public:
 	 * @brief: Devuelve la fecha en la que expirará la suscripción
 	 * @return: Fecha límite
 	 */
-	Fecha GetFechaLimite() const;
+	tm GetFechaLimite() const;
 	/**
 	 * @brief: Devuelve el tipo de suscripción que tiene el UsuarioVIP
 	 * @return: meses que contrató el UsuarioVIP
@@ -52,7 +49,7 @@ public:
 	 * @brief: modifica la fecha limite
 	 */
 	void setFechaLimite(int suscripcion);
-	void setFechaLimite(Fecha fecha);
+	void setFechaLimite(tm fecha);
 
 	////////////////////////////////////////////////////////////////////
 	/**
