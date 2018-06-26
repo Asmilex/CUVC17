@@ -2,48 +2,41 @@
 #include "include/UsuarioVIP.h"
 
 using namespace std;
-	UsuarioVIP::UsuarioVIP(){
-
-
-    }
 	UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, Fecha limit){
 
 
     }
-	UsuarioVIP::UsuarioVIP(std::string name, int suscripcion){
-
-
-    }
-
     ////////////////////////////////////////////////////////////////////
 
     string UsuarioVIP::GetName() const{
-
+        return this->_nombre;
     }
+
 	Fecha UsuarioVIP::GetFechaLimite() const{
-
-
+        return this->_limite;
     }
+
 	int UsuarioVIP::GetTipoSuscripcion() const{
-
-
+        return this->_tipo_suscripcion;
     }
 
     ////////////////////////////////////////////////////////////////////
 
-	void UsuarioVIP::setName(){
+	void UsuarioVIP::setName(std::string nombre){
+        this->_nombre = nombre;
+    }
+	void UsuarioVIP::setSuscripcion(int suscripcion){
+        this->_tipo_suscripcion = suscripcion;
+    }
+
+	void UsuarioVIP::setFechaLimite(int suscripcion){
 
 
     }
-	void UsuarioVIP::setSuscripcion(){
+    void UsuarioVIP::setFechaLimite(Fecha fecha){
 
 
     }
-	void UsuarioVIP::setFechaLimite(){
-
-
-    }
-
     ////////////////////////////////////////////////////////////////////
 
 	void UsuarioVIP::ActualizarSuscripcion(int suscription){
@@ -64,5 +57,5 @@ using namespace std;
     }
     void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension){
 
-        
+
     }

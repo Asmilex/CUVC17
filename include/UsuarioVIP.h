@@ -18,9 +18,7 @@ private:
 	Fecha _limite;
 
 public:
-	UsuarioVIP();
 	UsuarioVIP(std::string name, int suscripcion, Fecha limit);
-	UsuarioVIP(std::string name, int suscripcion);
 
 	////////////////////////////////////////////////////////////////////
 	/**
@@ -43,17 +41,18 @@ public:
 	/**
 	 * @brief: modifica el nombre de UsuarioVIP
 	 */
-	void setName();
+	void setName(std::string nombre);
 	
 	/**
 	 * @brief: modifica el tipo de suscripción
 	 */
-	void setSuscripcion();
+	void setSuscripcion(int suscripcion);
 
 	/**
 	 * @brief: modifica la fecha limite
 	 */
-	void setFechaLimite();
+	void setFechaLimite(int suscripcion);
+	void setFechaLimite(Fecha fecha);
 
 	////////////////////////////////////////////////////////////////////
 	/**
@@ -75,7 +74,7 @@ bool AnadirUsuarioVIP(UsuarioVIP *& VIPs);
  */
 bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, std::string usuario);
 /**
- * 
+ * @brief: amplia la lista de usuarios
  */
 void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension);
 
