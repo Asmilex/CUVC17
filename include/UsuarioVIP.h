@@ -48,14 +48,20 @@ public:
 	/**
 	 * @brief: modifica la fecha limite
 	 */
-	void setFechaLimite(int suscripcion);
-	void setFechaLimite(tm fecha);
+	//void setFechaLimite(int suscripcion);
+	//void setFechaLimite(tm fecha);
 
 	////////////////////////////////////////////////////////////////////
+	
 	/**
 	 * @brief: mejora la suscripcion y actualiza la fecha límite
 	 */
-	void ActualizarSuscripcion(int suscription);
+	void UpdateSuscripcion(int suscription);
+
+	/**
+	 *@brief: a partir de los meses que ya había, mejora la fecha límite por 1 o 3 meses 
+	*/
+	void UpdateFechaLimite(int suscripcion);
 };
 
 
