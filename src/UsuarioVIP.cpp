@@ -106,17 +106,16 @@ using namespace std;
     }
 
     void AmpliarMemoria(UsuarioVIP *& VIPs, int dim, int ampliacion){
-        if (ampliacion > 0){
-            UsuarioVIP * temporal = new UsuarioVIP [dim + ampliacion];
-
-            for (unsigned int i; i<dim; i++)
-                temporal[i] = VIPs[i];
-            
-            dim += ampliacion;
-            delete [] VIPs;
-
-            VIPs = temporal;
+        if (ampliacion <= 0){
+            throw std::out_of_range("Aumento negativo imposible");
         }
-        else
-            cerr <<"Error";
+        UsuarioVIP * temporal = new UsuarioVIP [dim + ampliacion];
+
+        for (unsigned int i; i<dim; i++)
+            temporal[i] = VIPs[i];
+            
+        dim += ampliacion;
+        delete [] VIPs;
+
+        VIPs = temporal;
     }

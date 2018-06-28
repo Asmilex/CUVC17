@@ -82,6 +82,7 @@ bool AnadirUsuarioVIP(UsuarioVIP *& VIPs);
 bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, int dim, std::string usuario);
 /**
  * @brief: amplia la lista de usuarios
+ * @throw: std::out_of_range si se intenta aumentar memoria de forma negativa
  */
 void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension, int ampliacion);
 
