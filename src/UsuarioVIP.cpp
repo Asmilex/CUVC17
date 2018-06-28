@@ -1,5 +1,6 @@
 #include "UsuarioVIP.h"
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -7,15 +8,7 @@ using namespace std;
     _nombre(name),
     _tipo_suscripcion(suscripcion)
     {
-        tm *tmp;
-        time_t fecha;
-        time(&fecha);
-        tmp = localtime(&fecha);
-
-        this->_limite.tm_mday = tmp->tm_mday;
-        this->_limite.tm_mon  = tmp->tm_mon  + 1 + suscripcion;
-        this->_limite.tm_year = tmp->tm_year +1900;
-        
+        ModifyFechaLimite(suscripcion);
     }
 
     UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, tm limit):
@@ -49,8 +42,16 @@ using namespace std;
         this->UpdateFechaLimite(suscripcion);
     }
 
-	//void UsuarioVIP::setFechaLimite(int suscripcion){}
-    //void UsuarioVIP::setFechaLimite(tm fecha){
+	void UsuarioVIP::ModifyFechaLimite(int suscripcion){
+        tm *tmp;
+        time_t fecha;
+        time(&fecha);
+        tmp = localtime(&fecha);
+
+        this->_limite.tm_mday = tmp->tm_mday;
+        this->_limite.tm_mon  = tmp->tm_mon  + 1 + suscripcion;
+        this->_limite.tm_year = tmp->tm_year + 1900;
+    }
 
     ////////////////////////////////////////////////////////////////////
     std::string UsuarioVIP::toCSV(){
@@ -68,18 +69,42 @@ using namespace std;
     ////////////////////////////////////////////////////////////////////
 
     bool AnadirUsuarioVIP(UsuarioVIP *& VIPs, int dim, UsuarioVIP nuevo_usuario){
-        AmpliarMemoria(VIPs, 1);
+        AmpliarMemoria(VIPs, dim, 1);
 
         VIPs[dim-1] = nuevo_usuario;
         
         return true;
     }
 
-    bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, std::string usuario){
+    bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, int dim, std::string usuario){
+        UsuarioVIP * temporal = new UsuarioVIP [dim-1];
 
+        unsigned int iterador_temp = 0;
+        
+        for (unsigned int i; i<dim; i++)
+            if (VIPs[i].GetName() != usuario){
+                temporal[iterador_temp] = VIPs[i];
+                iterador_temp++;
+            }
+        
+        dim--;
+        delete [] VIPs;
 
+        VIPs = temporal;
     }
-    void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension){
 
+    void AmpliarMemoria(UsuarioVIP *& VIPs, int dim, int ampliacion){
+        if (ampliacion > 0){
+            UsuarioVIP * temporal = new UsuarioVIP [dim + ampliacion];
 
+            for (unsigned int i; i<dim; i++)
+                temporal[i] = VIPs[i];
+            
+            dim += ampliacion;
+            delete [] VIPs;
+
+            VIPs = temporal;
+        }
+        else
+            cerr <<"Error";
     }

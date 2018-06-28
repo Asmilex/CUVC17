@@ -48,8 +48,7 @@ public:
 	/**
 	 * @brief: modifica la fecha limite
 	 */
-	//void setFechaLimite(int suscripcion);
-	//void setFechaLimite(tm fecha);
+	void ModifyFechaLimite(int suscripcion=0);
 
 	////////////////////////////////////////////////////////////////////
 	
@@ -72,10 +71,10 @@ bool AnadirUsuarioVIP(UsuarioVIP *& VIPs);
  * @brief: Elimina un UsuarioVIP a la lista de activos
  * @return: true si ha funcionado, else false
  */
-bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, std::string usuario);
+bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, int dim, std::string usuario);
 /**
  * @brief: amplia la lista de usuarios
  */
-void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension);
+void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension, int ampliacion);
 
 #endif
