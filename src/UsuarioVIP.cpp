@@ -17,9 +17,11 @@ using namespace std;
         }
     }
 
-    UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, tm limit){
-
-
+    UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, tm limit):
+    _nombre(name),
+    _tipo_suscripcion(suscripcion),
+    _limite(limit)
+    {
     }
     ////////////////////////////////////////////////////////////////////
 
