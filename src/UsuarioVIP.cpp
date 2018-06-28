@@ -63,16 +63,14 @@ using namespace std;
         
     }
     
-    void UsuarioVIP::fromCSV(std::string &cadena){
-        
-        std::stringstream ss(cadena);
-        std::getline(ss,_nombre,';');
-        std::getline(ss,_tipo_suscripcion,';');
-        std::getline(ss,_limite.tm_mday,'/');
-        std::getline(ss,_limite.tm_mon,'/');
+    void UsuarioVIP::fromCSV(std::string &cadena){        
+        stringstream ss(cadena);
+        getline(ss, _nombre,';');
+        getline(ss, _tipo_suscripcion,';');
+        getline(ss, _limite.tm_mday,'/');
+        getline(ss, _limite.tm_mon,'/');
         ss.ignore();
-        std::getline(ss,_limite.tm_year);
-        
+        getline(ss, _limite.tm_year);
     }
 
     void UsuarioVIP::UpdateFechaLimite(int suscripcion){

@@ -87,3 +87,11 @@ bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, int dim, std::string usuario);
 void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension, int ampliacion);
 
 #endif
+
+stringstream ss(cadena);
+getline(ss, _nombre,';');
+getline(ss,_tipo_suscripcion,'');
+getline(ss,_limite.tm_mday,';');
+getline(ss,_limite.tm_mon,'/');
+ss.ignore();
+getline(ss,_limite.tm_year);
