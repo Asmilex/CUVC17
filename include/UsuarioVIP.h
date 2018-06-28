@@ -56,6 +56,10 @@ public:
 	 * @brief: mejora la suscripcion y actualiza la fecha límite
 	 */
 	void ActualizarSuscripcion(int suscription);
+    /**
+     * @brief: devuelve datos como string en formato CSV
+     */
+    std::string toCSV();
 };
 
 

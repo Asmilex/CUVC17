@@ -1,10 +1,12 @@
 #include "UsuarioVIP.h"
+#include <sstream>
 
 using namespace std;
 
     UsuarioVIP::UsuarioVIP(std::string name, int suscripcion):
     _nombre(name),
-    _tipo_suscripcion(suscripcion){
+    _tipo_suscripcion(suscripcion)
+    {
         tm *tmp;
         time_t fecha;
         time(&fecha);
@@ -41,7 +43,7 @@ using namespace std;
 
 	void UsuarioVIP::setName(std::string nombre){
         this->_nombre = nombre;
-    }
+    }   
 	void UsuarioVIP::setSuscripcion(int suscripcion){
         this->_tipo_suscripcion = suscripcion;
     }
@@ -61,6 +63,14 @@ using namespace std;
 
     }
 
+    std::string UsuarioVIP::toCSV(){
+        
+        std::stringstream aux;
+        aux << this->_nombre << ";" << this->_tipo_suscripcion << ";" << this->_limite.tm_mday << "/" << this->_limite.tm_mon << "/" << this->_limite.tm_year << endl;
+        
+        return aux.str();
+        
+    }
     ////////////////////////////////////////////////////////////////////
 
     bool AnadirUsuarioVIP(UsuarioVIP *& VIPs){
