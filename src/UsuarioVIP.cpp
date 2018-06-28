@@ -1,4 +1,5 @@
 #include "UsuarioVIP.h"
+#include <sstream>
 
 using namespace std;
 
@@ -17,9 +18,11 @@ using namespace std;
         
     }
 
-    UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, tm limit){
-
-
+    UsuarioVIP::UsuarioVIP(std::string name, int suscripcion, tm limit):
+    _nombre(name),
+    _tipo_suscripcion(suscripcion),
+    _limite(limit)
+    {
     }
     ////////////////////////////////////////////////////////////////////
 
@@ -49,17 +52,19 @@ using namespace std;
 	//void UsuarioVIP::setFechaLimite(int suscripcion){}
     //void UsuarioVIP::setFechaLimite(tm fecha){
 
+    ////////////////////////////////////////////////////////////////////
+    std::string UsuarioVIP::toCSV(){
+        
+        std::stringstream aux;
+        aux << this->_nombre << ";" << this->_tipo_suscripcion << ";" << this->_limite.tm_mday << "/" << this->_limite.tm_mon << "/" << this->_limite.tm_year << endl;
+        
+        return aux.str();
+        
+    }
+
     void UsuarioVIP::UpdateFechaLimite(int suscripcion){
         _limite.tm_mon  += suscripcion;
     }
-
-    ////////////////////////////////////////////////////////////////////
-
-	void UsuarioVIP::UpdateSuscripcion(int suscription){
-
-
-    }
-
     ////////////////////////////////////////////////////////////////////
 
     bool AnadirUsuarioVIP(UsuarioVIP *& VIPs, int dim, UsuarioVIP nuevo_usuario){

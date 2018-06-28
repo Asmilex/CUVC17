@@ -53,15 +53,12 @@ public:
 
 	////////////////////////////////////////////////////////////////////
 	
-	/**
-	 * @brief: mejora la suscripcion y actualiza la fecha límite
-	 */
-	void UpdateSuscripcion(int suscription);
-
-	/**
-	 *@brief: a partir de los meses que ya había, mejora la fecha límite por 1 o 3 meses 
-	*/
+	
 	void UpdateFechaLimite(int suscripcion);
+    /**
+     * @brief: devuelve datos como string en formato CSV
+     */
+    std::string toCSV();
 };
 
 
