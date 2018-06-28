@@ -52,12 +52,20 @@ public:
 
 	////////////////////////////////////////////////////////////////////
 	
-	
+	//TODO Doxygen
 	void UpdateFechaLimite(int suscripcion);
+    
     /**
      * @brief: devuelve datos como string en formato CSV
+     * @return: string con los datos separados por ;
      */
     std::string toCSV();
+    
+    /**
+     * @brief: Recupera datos en formato CSV
+     * 
+     */
+    void fromCSV(std::string &cadena);
 };
 
 
