@@ -4,15 +4,15 @@ using namespace std;
 
     UsuarioVIP::UsuarioVIP(std::string name, int suscripcion):
     _nombre(name),
-    _tipo_suscripcion(suscripcion)
-    {
+    _tipo_suscripcion(suscripcion){
         tm *tmp;
         time_t fecha;
         time(&fecha);
         tmp = localtime(&fecha);
-        if(suscripcion == 1){
+
+        if (suscripcion == 1 || suscripcion == 3){
             this->_limite.tm_mday = tmp->tm_mday;
-            this->_limite.tm_mon = tmp->tm_mon +2;
+            this->_limite.tm_mon  = tmp->tm_mon  + 1 + suscripcion;
             this->_limite.tm_year = tmp->tm_year +1900;
         }
     }

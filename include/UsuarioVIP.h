@@ -14,7 +14,7 @@ private:
 	tm _limite;
 
 public:
-        UsuarioVIP(std::string name="", int suscripcion=0);
+	UsuarioVIP(std::string name="", int suscripcion=1);
 	UsuarioVIP(std::string name, int suscripcion, tm limit);
 
 	////////////////////////////////////////////////////////////////////
