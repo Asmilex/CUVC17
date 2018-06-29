@@ -1,4 +1,4 @@
-#include "UsuariosVIP_functions.h"
+#include "UsuarioVIP_functions.h"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -19,9 +19,12 @@ BOOL CtrlHandler( 	DWORD fdwCtrlType,
     // CTRL-CLOSE: confirm that the user wants to exit. 
     case CTRL_CLOSE_EVENT: 
 		Beep( 600, 200 );
-		SaveFile(VIPs, dim);
-		delete [] VIPs;
-		printf( "Ctrl-Close event. Saving file (theoretically)\n\n" );
+		
+		if (VIPs != nullptr) {
+			SaveFile(VIPs, dim);
+			delete [] VIPs;
+		}
+		
 		return( TRUE ); 
 
     // Pass other signals to the next handler. 
@@ -58,7 +61,8 @@ int main(){
 		UsuarioVIP * VIPs = nullptr;
 		unsigned int dim = 0;
 
-		if (FileExists()){
+		// Tamaño > 0 para evitar crasheos por si el archivo estuviera vacío 
+		if (FileExists() && FileSize() > 0){
 			LoadFile(VIPs, dim);
 		}
 
@@ -67,44 +71,44 @@ int main(){
 			DisplayUsers(VIPs, dim);
 			
 			cout << "1) Añadir Usuario" << endl;
-			cout << "2) Eliminar Usuario" << endl;
-			cout << "3) Salir" << endl;
+			cout << "2) Salir" << endl;
 			cin >> opcion;
 			
 			switch(opcion){
-				case 1:
+				case 1:{
 					string user;
 					int suscripcion;
 
-					cout <<"Nombre del usuario: \t";
+					cout <<"Nombre del usuario: ";
 					cin >>user;
 
-					cout <<endl<<"Tipo de suscripción: \t";
+					cout <<endl<<"Tipo de suscripción: ";
 					cin >>suscripcion;
 
 					UsuarioVIP nuevo_usuario(user, suscripcion);
 
 					if(AnadirUsuarioVIP(VIPs, dim, nuevo_usuario))
-						cout <<"Usuario añadido correctamente";
+						cout <<"Usuario añadido correctamente\n";
 					else
-						cerr <<"No se ha podudo añadir el usuario";
-
+						cerr <<"No se ha podudo añadir el usuario\n";
+				}
 					break;
 
-				case 2:
-					break;
-				case 3:
-					SaveFile(VIPs, dim);
-					delete [] VIPs;
+				case 2:{
+					if (VIPs != nullptr){
+						SaveFile(VIPs, dim);
+						delete [] VIPs;
+					}
 					return 0;
-				default:
+				}
+				default:{
 					do{
 						cout <<"Pusla la tecla correcta, mamón"<<endl;
 						cin >>opcion;
 
-					} while (opcion != 1 || opcion != 2 || opcion != 3)
+					} while (opcion != 1 || opcion != 2)
+				}
 					break;
-
 			}
 			
 		}

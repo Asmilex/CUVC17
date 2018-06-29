@@ -42,7 +42,7 @@ void DisplayUsers(UsuarioVIP * VIPs, int dim){
         cout<<"-"<<endl;
 
         for (int i=0; i<dim; i++){
-            cout <<setw(30)<<left<<setfill(' ')<<VIPs[i].GetName<<"     "<<VIPs[i].GetTipoSuscripcion<<"            ";
+            cout <<setw(30)<<left<<setfill(' ')<<VIPs[i].GetName()<<"     "<<VIPs[i].GetTipoSuscripcion()<<"            ";
             cout <<right<<VIPs[i].GetFechaLimite().tm_mday<<"/"
                         <<VIPs[i].GetFechaLimite().tm_mon <<"/"
                         <<VIPs[i].GetFechaLimite().tm_year<<endl;
@@ -50,6 +50,11 @@ void DisplayUsers(UsuarioVIP * VIPs, int dim){
     }
     else
         cout <<endl<<"No hay usuarios almacenados en la base de datos"<<endl;
+}
+
+bool LimitChecker(UsuarioVIP * VIPs, int dim){
+
+
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -93,8 +98,11 @@ int SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomAr
     }
     else
         throw error("El fichero no se ha podido abrir");
+}
 
-
+ifstream::pos_type FileSize(string filename){
+    std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+    return in.tellg(); 
 }
 
 //TODO: La devolución la has puesto como entera a posta, o ha sido un error?

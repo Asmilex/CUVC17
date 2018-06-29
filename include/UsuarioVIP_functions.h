@@ -8,7 +8,7 @@
  * @brief: Añade un UsuarioVIP a la lista de activos
  * @return: true si ha funcionado, else false
  */
-bool AnadirUsuarioVIP(UsuarioVIP * VIPs);
+bool AnadirUsuarioVIP(UsuarioVIP * VIPs, int dim, UsuarioVIP nuevo_usuario);
 
 /**
  * @brief: Elimina un UsuarioVIP a la lista de activos
@@ -20,6 +20,13 @@ bool EliminarUsuarioVIP(UsuarioVIP * VIPs, int dim, std::string usuario);
  * @brief: muestra los usuarios en pantalla
  */
 void DisplayUsers(UsuarioVIP * VIPs, int dim);
+
+/**
+ * @brief: comprueba qué usuarios se han pasado de su fecha límite
+ * Los que se hayan pasado, mueren
+ */
+bool LimitChecker(UsuarioVIP * VIPs, int dim);
+
 
 ////////////////////////////////////////////////////////////////////
 
@@ -34,8 +41,13 @@ void AmpliarMemoria(int ampliacion, UsuarioVIP * VIPs=nullptr, int dim=0);
  * @brief: comprueba si existe el ficher
  * @return: true si existe, false en caso contrario
  */
-
 bool FileExists(const std::string fileName="./UsuariosVIP.txt");
+
+/**
+ * @brief: devuelve el tamaño del archivo pasado
+ */
+
+std::ifstream::pos_type FileSize(string filename="./UsuariosVIP.txt");
 /**
  * @brief: guarda los datos de los usuarios en un archivo de texto
  * @return: 
