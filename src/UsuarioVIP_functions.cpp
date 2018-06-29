@@ -49,7 +49,7 @@ void DisplayUsers(UsuarioVIP * VIPs, int dim){
         }
     }
     else
-        cout <<endl<<"No hay usuarios almacenados en la base de datos"<<endl;
+        cout << endl << "No hay usuarios almacenados en la base de datos"<< endl;
 }
 
 bool LimitChecker(UsuarioVIP * VIPs, int dim){
@@ -97,7 +97,7 @@ int SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomAr
         fichero.close();
     }
     else
-        throw error("El fichero no se ha podido abrir");
+        throw std::runtime_error("El fichero no se ha podido abrir");
 }
 
 ifstream::pos_type FileSize(string filename){
@@ -129,5 +129,5 @@ int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo){
     }
     else
         //TODO: Manejo de errores
-        throw error("El fichero no se ha podido abrir");
+        throw runtime_error("El fichero no se ha podido abrir");
 }

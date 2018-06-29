@@ -10,7 +10,7 @@ BOOL CtrlHandler( 	DWORD fdwCtrlType,
 					const UsuarioVIP * VIPs, const unsigned int dim)
 {    
 	switch( fdwCtrlType ){ 
-    // Handle the CTRL-C signal. 
+    // Handle the CTRL-C signal. 3
     case CTRL_C_EVENT: 
 		printf( "Ctrl-C event\n\n" );
       	Beep( 750, 300 ); 
@@ -84,6 +84,9 @@ int main(){
 
 					cout <<endl<<"Tipo de suscripción: ";
 					cin >>suscripcion;
+					if(suscripcion < 0){
+						cerr << "Suscripcion Imposible";
+					}
 
 					UsuarioVIP nuevo_usuario(user, suscripcion);
 
@@ -101,9 +104,10 @@ int main(){
 					}
 					return 0;
 				}
+
 				default:{
 					do{
-						cout <<"Pusla la tecla correcta, mamón"<<endl;
+						cout <<"Pulsa la tecla correcta, mamón"<<endl;
 						cin >>opcion;
 
 					} while (opcion != 1 || opcion != 2)
