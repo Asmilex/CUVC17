@@ -45,53 +45,40 @@ public:
 	 */
 	void setSuscripcion(int suscripcion);
 
-	/**
-	 * @brief: modifica la fecha limite
-	 */
-	void ModifyFechaLimite(int suscripcion=0);
-
 	////////////////////////////////////////////////////////////////////
+	/**
+	 * @brief: modifica la fecha limite atendiendo a la hora actual
+	 * @param suscripcion: meses añadidos a la fecha límite. Si es 0, se usa la hora local
+	 */
+	void UpdateFechaLimite_local(int suscripcion=0);
+
+	/**
+	 * @brief: modifica la fecha límite, actualizándola según la nueva suscripción
+	 * @param suscripcion: meses añadidos a la fecha límite
+	 */
+	void UpdateFechaLimite_suscription(int suscripcion);
 	
-	//TODO Doxygen
-	void UpdateFechaLimite(int suscripcion);
+	/**
+	 * @brief: modifica la fecha limite, introduciendo manualmente las fechas
+	 * @pre: tienen un formato válido
+	 */
+	void UpdateFechaLimite_manual(int ano, int mes, int dia);
+	////////////////////////////////////////////////////////////////////
     
     /**
      * @brief: devuelve datos como string en formato CSV
      * @return: string con los datos separados por ;
      */
-    std::string toCSV();
+    std::string toCSV() const;
     
     /**
      * @brief: Recupera datos en formato CSV
      * 
      */
     void fromCSV(std::string &cadena);
+
+	////////////////////////////////////////////////////////////////////
+
 };
 
-
-/**
- * @brief: Añade un UsuarioVIP a la lista de activos
- * @return: true si ha funcionado, else false
- */
-bool AnadirUsuarioVIP(UsuarioVIP *& VIPs);
-
-/**
- * @brief: Elimina un UsuarioVIP a la lista de activos
- * @return: true si ha funcionado, else false
- */
-bool EliminarUsuarioVIP(UsuarioVIP *& VIPs, int dim, std::string usuario);
-/**
- * @brief: amplia la lista de usuarios
- * @throw: std::out_of_range si se intenta aumentar memoria de forma negativa
- */
-void AmpliarMemoria(UsuarioVIP *& VIPs, int dimension, int ampliacion);
-
 #endif
-
-stringstream ss(cadena);
-getline(ss, _nombre,';');
-getline(ss,_tipo_suscripcion,'');
-getline(ss,_limite.tm_mday,';');
-getline(ss,_limite.tm_mon,'/');
-ss.ignore();
-getline(ss,_limite.tm_year);
