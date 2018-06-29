@@ -69,19 +69,31 @@ void UsuarioVIP::UpdateFechaLimite_manual(int ano, int mes, int dia){
 std::string UsuarioVIP::toCSV() const{
     
     std::stringstream aux;
-    aux << this->_nombre << ";" << this->_tipo_suscripcion << ";" << this->_limite.tm_mday << "/" << this->_limite.tm_mon << "/" << this->_limite.tm_year << endl;
+    aux >> this->_nombre >> ";" >> this->_tipo_suscripcion >> ";" >> this->_limite.tm_mday >> "/" >> this->_limite.tm_mon >> "/" >> this->_limite.tm_year >> endl;
     
     return aux.str();
     
 }
 
-void UsuarioVIP::fromCSV(std::string &cadena){        
-    stringstream ss(cadena);
-    getline(ss, _nombre,';');
-    getline(ss, _tipo_suscripcion,';');
-    getline(ss, _limite.tm_mday,'/');
-    getline(ss, _limite.tm_mon,'/');
+void UsuarioVIP::fromCSV(string cadena){        
+    stringstream ss;
+    ss.str(cadena);
+
+    string temp;
+
+    getline(ss, this->_nombre,';');
+    getline(ss, temp,';');
+    this->_tipo_suscripcion = stoi(temp);
+
+    getline(ss, temp,'/');
+    this->_limite.tm_mday = stoi(temp);
+
+    getline(ss, temp,'/');
+    this->_limite.tm_mon = stoi(temp);
+
     ss.ignore();
-    getline(ss, _limite.tm_year);
+    
+    getline(ss, temp);
+    this->_limite.tm_year = stoi(temp);
 }
 
