@@ -29,12 +29,14 @@ bool LimitChecker(UsuarioVIP * VIPs, int dim);
 
 
 ////////////////////////////////////////////////////////////////////
+void ReservarMemoria(UsuarioVIP * VIPs, int dim);
+
 
 /**
  * @brief: amplia la lista de usuarios
  * @throw: std::out_of_range si se intenta aumentar memoria de forma negativa
  */
-void AmpliarMemoria(int ampliacion, UsuarioVIP * VIPs=nullptr, int dim=0);
+void AmpliarMemoria(int ampliacion, UsuarioVIP * VIPs, int dim);
 
 ////////////////////////////////////////////////////////////////////
 /**
@@ -61,6 +63,7 @@ int SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomAr
 int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo="./UsuariosVIP.txt");
 
 ////////////////////////////////////////////////////////////////////
+tm getLocalTime();
 
 bool operator==(const tm & fecha1,const tm & fecha2);	
 bool operator!=(tm fecha1, tm fecha2);

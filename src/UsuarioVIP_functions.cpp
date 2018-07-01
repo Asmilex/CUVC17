@@ -7,12 +7,20 @@ using namespace std;
 
 //TODO: Comprobar que los usuarios no se pasen del día
 
+//FIXME:
 bool AnadirUsuarioVIP(UsuarioVIP * VIPs, int dim, UsuarioVIP nuevo_usuario){
-    AmpliarMemoria(1, VIPs, dim);
-
-    VIPs[dim-1] = nuevo_usuario;
+    cout <<"Función Añadir";
     
-    return true;
+    if (VIPs == nullptr){
+        dim++;
+        ReservarMemoria(VIPs, dim);
+    }
+    else
+        AmpliarMemoria(1, VIPs, dim);
+        
+    //VIPs[dim-1] = nuevo_usuario;
+    
+    return true;    
 }
 
 bool EliminarUsuarioVIP(UsuarioVIP * VIPs, int dim, std::string usuario){
@@ -64,7 +72,7 @@ bool LimitChecker(UsuarioVIP * VIPs, int dim){
 
 }
 ////////////////////////////////////////////////////////////////////
-
+//FIXME:
 void AmpliarMemoria(int ampliacion, UsuarioVIP * VIPs, int dim){
     if (ampliacion <= 0){
         throw out_of_range("Aumento negativo o nulo imposible");
@@ -82,6 +90,15 @@ void AmpliarMemoria(int ampliacion, UsuarioVIP * VIPs, int dim){
     dim += ampliacion;
 
     VIPs = temporal;
+}
+//FIXME:
+void ReservarMemoria(UsuarioVIP * VIPs, int dim){
+    if (dim <= 0)
+        throw out_of_range("Reserva de memoria menor o igual a 0");
+    if (VIPs != nullptr)
+        throw out_of_range("Reserva de memoria con puntero != nulo ");
+
+    VIPs = new UsuarioVIP [dim];
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -122,7 +139,7 @@ int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo){
     if(fichero.good()){
         fichero >> dim;
         
-        AmpliarMemoria(dim);
+        ReservarMemoria(VIPs, dim);
 
         for(int i = 0; i < dim; i++){
             getline(fichero, linea);

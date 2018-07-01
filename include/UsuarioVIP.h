@@ -78,6 +78,9 @@ public:
     void fromCSV(const std::string &cadena);
 
 	////////////////////////////////////////////////////////////////////
+
+	UsuarioVIP& operator=(const UsuarioVIP & nuevo_usuario);
+
 };
 
 #endif

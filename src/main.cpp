@@ -56,10 +56,10 @@ BOOL CtrlHandler( 	DWORD fdwCtrlType,
 int main(){
     //if( SetConsoleCtrlHandler( (PHANDLER_ROUTINE) CtrlHandler, TRUE ) )
 	{ 
-			printf( "\nThe Control Handler is installed.\n" ); 
-			printf( "\n -- Now try pressing Ctrl+C or Ctrl+Break, or" ); 
-			printf( "\n    try logging off or closing the console...\n" ); 
-			printf( "\n(...waiting in a loop for events...)\n\n" ); 
+		printf( "\nThe Control Handler is installed.\n" ); 
+		printf( "\n -- Now try pressing Ctrl+C or Ctrl+Break, or" ); 
+		printf( "\n    try logging off or closing the console...\n" ); 
+		printf( "\n(...waiting in a loop for events...)\n\n" ); 
 
 		//Recuperción de Usuarios
 		UsuarioVIP * VIPs = nullptr;
@@ -88,6 +88,7 @@ int main(){
 
 					cout <<endl<<"Tipo de suscripción: ";
 					cin >>suscripcion;
+
 					if(suscripcion < 0){
 						cerr << "Suscripcion Imposible";
 					}
