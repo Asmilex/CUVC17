@@ -53,7 +53,14 @@ void DisplayUsers(UsuarioVIP * VIPs, int dim){
 }
 
 bool LimitChecker(UsuarioVIP * VIPs, int dim){
+    if (VIPs == nullptr)
+        return false;
+    
+    for (unsigned int i=0; i < dim; i++){
+        if (VIPs[i].GetFechaLimite() > getLocalTime())
+            cout <<"FIXME";
 
+    }
 
 }
 ////////////////////////////////////////////////////////////////////
@@ -130,4 +137,85 @@ int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo){
     else
         //TODO: Manejo de errores
         throw runtime_error("El fichero no se ha podido abrir");
+}
+
+////////////////////////////////////////////////////////////////////
+
+tm getLocalTime(){
+    time_t      t1  = time(0);           // get time now
+    struct tm* now  = localtime( & t1 ); // convert to local time
+    
+
+    now->tm_mon  += 1;
+    now->tm_year += 1900;
+
+    struct tm  copy = *now;              // make a local copy.
+    return copy;
+}
+
+bool operator==(tm fecha1, tm fecha2){
+    if (fecha1.tm_year == fecha2.tm_year && 
+        fecha1.tm_mon  == fecha2.tm_mon  &&
+        fecha1.tm_mday == fecha2.tm_mday)
+        
+        return true;
+    else
+        return false;
+
+}
+
+bool operator!=(tm fecha1, tm fecha2){
+    if (fecha1.tm_year == fecha2.tm_year && 
+        fecha1.tm_mon  == fecha2.tm_mon  &&
+        fecha1.tm_mday == fecha2.tm_mday)
+        
+        return false;
+    else
+        return true;
+}
+
+bool operator>(tm fecha1, tm fecha2){
+    if (fecha1.tm_year <= fecha2.tm_year)
+        return false;
+    else if (fecha1.tm_mon <= fecha2.tm_mon)
+        return false;
+    else if (fecha1.tm_mday <= fecha2.tm_mday)
+        return false;
+    else
+        return true;
+}
+
+bool operator>=(tm fecha1, tm fecha2){
+    if (fecha1.tm_year < fecha2.tm_year)
+        return false;
+    else if (fecha1.tm_mon < fecha2.tm_mon)
+        return false;
+    else if (fecha1.tm_mday < fecha2.tm_mday)
+        return false;
+    else
+        return true;
+}
+
+bool operator<(tm fecha1, tm fecha2){
+    if (fecha1.tm_year >= fecha2.tm_year)
+        return false;
+    else if (fecha1.tm_mon >= fecha2.tm_mon)
+        return false;
+    else if (fecha1.tm_mday >= fecha2.tm_mday)
+        return false;
+    else
+        return true;
+
+}
+
+bool operator<=(tm fecha1, tm fecha2){
+    if (fecha1.tm_year > fecha2.tm_year)
+        return false;
+    else if (fecha1.tm_mon > fecha2.tm_mon)
+        return false;
+    else if (fecha1.tm_mday > fecha2.tm_mday)
+        return false;
+    else
+        return true;
+
 }

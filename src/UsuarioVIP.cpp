@@ -66,7 +66,8 @@ void UsuarioVIP::UpdateFechaLimite_manual(int ano, int mes, int dia){
 }
 
 ////////////////////////////////////////////////////////////////////
-std::string UsuarioVIP::toCSV() const{
+//FIXME: Sigue sin funcionar
+/**std::string UsuarioVIP::toCSV() const{
     
     std::stringstream aux;
     aux >> this->_nombre >> ";" >> this->_tipo_suscripcion >> ";" >> this->_limite.tm_mday >> "/" >> this->_limite.tm_mon >> "/" >> this->_limite.tm_year >> endl;
@@ -74,8 +75,8 @@ std::string UsuarioVIP::toCSV() const{
     return aux.str();
     
 }
-
-void UsuarioVIP::fromCSV(string cadena){        
+*/
+void UsuarioVIP::fromCSV(const string &cadena){        
     stringstream ss;
     ss.str(cadena);
 

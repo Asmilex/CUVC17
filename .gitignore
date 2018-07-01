@@ -1,3 +1,4 @@
 cmake_install.cmake
-CNakeCache.txt
+CMakeCache.txt
 CMakeFiles/*
+Makefile

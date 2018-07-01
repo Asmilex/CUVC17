@@ -1,10 +1,13 @@
 #include "UsuarioVIP_functions.h"
 #include <iostream>
 #include <fstream>
-#include <windows.h>
+//#include <windows.h>
 #include <stdio.h>
 
 using namespace std;
+
+/** Descomenta esta función y el condicional del main para compilar para Windows
+ 
 
 BOOL CtrlHandler( 	DWORD fdwCtrlType, 
 					const UsuarioVIP * VIPs, const unsigned int dim)
@@ -49,9 +52,10 @@ BOOL CtrlHandler( 	DWORD fdwCtrlType,
       	return FALSE; 
   } 
 } 
-
+*/
 int main(){
-    if( SetConsoleCtrlHandler( (PHANDLER_ROUTINE) CtrlHandler, TRUE ) ){ 
+    //if( SetConsoleCtrlHandler( (PHANDLER_ROUTINE) CtrlHandler, TRUE ) )
+	{ 
 			printf( "\nThe Control Handler is installed.\n" ); 
 			printf( "\n -- Now try pressing Ctrl+C or Ctrl+Break, or" ); 
 			printf( "\n    try logging off or closing the console...\n" ); 
@@ -110,7 +114,7 @@ int main(){
 						cout <<"Pulsa la tecla correcta, mamón"<<endl;
 						cin >>opcion;
 
-					} while (opcion != 1 || opcion != 2)
+					} while (opcion != 1 || opcion != 2);
 				}
 					break;
 			}
@@ -119,10 +123,10 @@ int main(){
 		//Cuando lo probé, con la siguiente linea funcionaba. Supongo que no pasa nada por comentarla
 		//while( 1 ){ } 
     }  
-    else{
-        printf( "\nERROR: Could not set control handler"); 
-        return 1;
-    }
+    //else{
+    //    printf( "\nERROR: Could not set control handler"); 
+    //    return 1;
+    //}
 }
 
 

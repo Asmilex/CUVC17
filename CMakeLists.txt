@@ -1,8 +1,11 @@
 cmake_minimum_required (VERSION 2.6)
 
 #Si se va a compilar en Windows, descomenta las siguientes dos líneas:
-SET(CMAKE_C_COMPILER C:/MinGW/bin/gcc.exe)
-SET(CMAKE_CXX_COMPILER C:/MinGW/bin/g++.exe)
+#SET(CMAKE_C_COMPILER C:/MinGW/bin/gcc.exe)
+#SET(CMAKE_CXX_COMPILER C:/MinGW/bin/g++.exe)
+
+#Directorio del ejecutable
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 project (CUVC17)
 

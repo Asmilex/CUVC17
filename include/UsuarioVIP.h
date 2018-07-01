@@ -75,10 +75,9 @@ public:
      * @brief: Recupera datos en formato CSV
      * 
      */
-    void fromCSV(std::string &cadena);
+    void fromCSV(const std::string &cadena);
 
 	////////////////////////////////////////////////////////////////////
-
 };
 
 #endif

@@ -60,5 +60,13 @@ int SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomAr
  */
 int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo="./UsuariosVIP.txt");
 
+////////////////////////////////////////////////////////////////////
+
+bool operator==(const tm & fecha1,const tm & fecha2);	
+bool operator!=(tm fecha1, tm fecha2);
+bool operator>(tm fecha1, tm fecha2);
+bool operator >=(tm fecha1, tm fecha2);
+bool operator <(tm fecha1, tm fecha2);
+bool operator <=(tm fecha1, tm fecha2);
 
 #endif
