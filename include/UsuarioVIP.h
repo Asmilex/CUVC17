@@ -4,14 +4,11 @@
 #include <string>
 #include <ctime>
 
-using namespace std;
-
-
 class UsuarioVIP{
 private:
 	std::string _nombre;
 	int _tipo_suscripcion;
-	tm _limite;
+	std::tm _limite;
 
 public:
 	UsuarioVIP(std::string name="", int suscripcion=1);
@@ -27,7 +24,7 @@ public:
 	 * @brief: Devuelve la fecha en la que expirará la suscripción
 	 * @return: Fecha límite
 	 */
-	tm GetFechaLimite() const;
+	std::tm GetFechaLimite() const;
 	/**
 	 * @brief: Devuelve el tipo de suscripción que tiene el UsuarioVIP
 	 * @return: meses que contrató el UsuarioVIP

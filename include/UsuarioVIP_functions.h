@@ -49,27 +49,27 @@ bool FileExists(const std::string fileName="./UsuariosVIP.txt");
  * @brief: devuelve el tamaño del archivo pasado
  */
 
-std::ifstream::pos_type FileSize(string filename="./UsuariosVIP.txt");
+std::ifstream::pos_type FileSize(std::string filename="./UsuariosVIP.txt");
 /**
  * @brief: guarda los datos de los usuarios en un archivo de texto
  * @return: 
  */
-int SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomArchivo="./UsuariosVIP.txt");
+bool SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const std::string nomArchivo="./UsuariosVIP.txt");
 
 /**
  * @brief: recupera los datos de los usuarios a partir del archivo proporcionado
  * @return: 
  */
-int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo="./UsuariosVIP.txt");
+bool LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const std::string nomArchivo="./UsuariosVIP.txt");
 
 ////////////////////////////////////////////////////////////////////
-tm getLocalTime();
+std::tm getLocalTime();
 
 bool operator==(const tm & fecha1,const tm & fecha2);	
-bool operator!=(tm fecha1, tm fecha2);
-bool operator>(tm fecha1, tm fecha2);
-bool operator >=(tm fecha1, tm fecha2);
-bool operator <(tm fecha1, tm fecha2);
-bool operator <=(tm fecha1, tm fecha2);
+bool operator!=(const tm & fecha1,const tm & fecha2);
+bool operator> (const tm & fecha1,const tm & fecha2);
+bool operator>=(const tm & fecha1,const tm & fecha2);
+bool operator< (const tm & fecha1,const tm & fecha2);
+bool operator<=(const tm & fecha1,const tm & fecha2);
 
 #endif

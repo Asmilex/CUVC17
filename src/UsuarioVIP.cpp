@@ -102,4 +102,6 @@ UsuarioVIP& UsuarioVIP::operator=(const UsuarioVIP & nuevo_usuario){
     this->_nombre           = nuevo_usuario._nombre;
     this->_limite           = nuevo_usuario._limite;
     this->_tipo_suscripcion = nuevo_usuario._tipo_suscripcion;
+
+    return *this;
 }

@@ -38,6 +38,8 @@ bool EliminarUsuarioVIP(UsuarioVIP * VIPs, int dim, std::string usuario){
     delete [] VIPs;
 
     VIPs = temporal;
+
+    return true;
 }
 
 void DisplayUsers(UsuarioVIP * VIPs, int dim){
@@ -70,6 +72,7 @@ bool LimitChecker(UsuarioVIP * VIPs, int dim){
 
     }
 
+    return true;
 }
 ////////////////////////////////////////////////////////////////////
 //FIXME:
@@ -107,7 +110,7 @@ bool FileExists(const std::string fileName){
     return infile.good();
 }
 
-int SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomArchivo){
+bool SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomArchivo){
     ofstream fichero;
 
     fichero.open(nomArchivo);
@@ -119,6 +122,7 @@ int SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomAr
             fichero <<VIPs[i].toCSV();
 
         fichero.close();
+        return true;
     }
     else
         throw std::runtime_error("El fichero no se ha podido abrir");
@@ -130,7 +134,7 @@ ifstream::pos_type FileSize(string filename){
 }
 
 //TODO: La devolución la has puesto como entera a posta, o ha sido un error?
-int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo){
+bool LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo){
     ifstream fichero;
     string linea;
     
@@ -150,6 +154,7 @@ int LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo){
             VIPs[i].fromCSV(linea);
         }
         fichero.close();
+        return true;
     }
     else
         //TODO: Manejo de errores
@@ -170,7 +175,7 @@ tm getLocalTime(){
     return copy;
 }
 
-bool operator==(tm fecha1, tm fecha2){
+bool operator==(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year == fecha2.tm_year && 
         fecha1.tm_mon  == fecha2.tm_mon  &&
         fecha1.tm_mday == fecha2.tm_mday)
@@ -181,7 +186,7 @@ bool operator==(tm fecha1, tm fecha2){
 
 }
 
-bool operator!=(tm fecha1, tm fecha2){
+bool operator!=(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year == fecha2.tm_year && 
         fecha1.tm_mon  == fecha2.tm_mon  &&
         fecha1.tm_mday == fecha2.tm_mday)
@@ -191,7 +196,7 @@ bool operator!=(tm fecha1, tm fecha2){
         return true;
 }
 
-bool operator>(tm fecha1, tm fecha2){
+bool operator>(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year <= fecha2.tm_year)
         return false;
     else if (fecha1.tm_mon <= fecha2.tm_mon)
@@ -202,7 +207,7 @@ bool operator>(tm fecha1, tm fecha2){
         return true;
 }
 
-bool operator>=(tm fecha1, tm fecha2){
+bool operator>=(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year < fecha2.tm_year)
         return false;
     else if (fecha1.tm_mon < fecha2.tm_mon)
@@ -213,7 +218,7 @@ bool operator>=(tm fecha1, tm fecha2){
         return true;
 }
 
-bool operator<(tm fecha1, tm fecha2){
+bool operator<(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year >= fecha2.tm_year)
         return false;
     else if (fecha1.tm_mon >= fecha2.tm_mon)
@@ -225,7 +230,7 @@ bool operator<(tm fecha1, tm fecha2){
 
 }
 
-bool operator<=(tm fecha1, tm fecha2){
+bool operator<=(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year > fecha2.tm_year)
         return false;
     else if (fecha1.tm_mon > fecha2.tm_mon)
@@ -234,5 +239,4 @@ bool operator<=(tm fecha1, tm fecha2){
         return false;
     else
         return true;
-
 }
