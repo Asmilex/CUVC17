@@ -4,9 +4,7 @@
 #include <iomanip> //flags para cout
 using namespace std;
 
-
 //TODO: Comprobar que los usuarios no se pasen del día
-
 bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP nuevo_usuario){    
     if (nuevo_usuario.GetTipoSuscripcion() != 1 && nuevo_usuario.GetTipoSuscripcion() != 3){
         cerr <<"El tipo de suscripción no está disponible según tu plan (1 ó 3 meses)\n";
@@ -37,24 +35,44 @@ bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, const std::string usuari
     return true;
 }
 
-void DisplayUsers(const std::vector<UsuarioVIP> & VIPs){
-    if (VIPs.size() != 0){
-        cout <<setw(30)<<left<<setfill(' ')<<"Usuario"<<"Suscripcion         ";  
-        cout <<"Fecha"<<endl;
+bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, int posicion){ 
+   if (posicion <= 0 && posicion > VIPs.size()){
+       throw out_of_range("Posición inválida");
+    }
 
-        cout.width(58);
+    VIPs.erase(VIPs.begin() + (--posicion));
+
+    return true;
+}
+
+void DisplayUsers(const std::vector<UsuarioVIP> & VIPs){
+    cout <<"\n\n\n\n";
+    if (VIPs.size() != 0){
+        cout <<setw(33)<<left<<setfill(' ')<<"   Usuario"<<"Suscripcion         ";  
+        cout <<"  Fecha"<<endl;
+
+        cout.width(62);
         cout.fill('-');
         cout<<"-"<<endl;
 
         for (int i=0; i<VIPs.size(); i++){
-            cout <<setw(30)<<left<<setfill(' ')<<VIPs[i].GetName()<<"     "<<VIPs[i].GetTipoSuscripcion()<<"            ";
+            cout <<i+1<<"- ";
+            cout <<setw(30)<<left<<setfill(' ')<<VIPs[i].GetName()<<"     "<<VIPs[i].GetTipoSuscripcion()<<"               ";
             cout <<right<<VIPs[i].GetFechaLimite().tm_mday<<"/"
                         <<VIPs[i].GetFechaLimite().tm_mon <<"/"
                         <<VIPs[i].GetFechaLimite().tm_year<<endl;
         }
+
+        cout.width(62);
+        cout.fill('-');
+        cout<<"-"<<endl;
     }
     else
         cout << endl << "No hay usuarios almacenados en la base de datos"<< endl;
+}
+
+void ClearScreen(){
+    cout << string(100, '\n');
 }
 
 bool LimitChecker(const std::vector<UsuarioVIP> & VIPs){

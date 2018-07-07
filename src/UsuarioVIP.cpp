@@ -73,7 +73,7 @@ std::string UsuarioVIP::toCSV() const{
     
     return aux.str();
 }
-
+//FIXME: 
 void UsuarioVIP::fromCSV(const string &cadena){        
     stringstream ss;
     ss.str(cadena);

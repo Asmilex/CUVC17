@@ -16,11 +16,17 @@ bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP nuevo_usua
  * @return: true si ha funcionado, else false
  */
 bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, const std::string usuario);
+bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, int posicion);
 
 /**
  * @brief: muestra los usuarios en pantalla
  */
 void DisplayUsers(const std::vector<UsuarioVIP> & VIPs);
+
+/**
+ * @brief: función patética que limpia la pantalla
+ */
+void ClearScreen();
 
 /**
  * @brief: comprueba qué usuarios se han pasado de su fecha límite
@@ -33,24 +39,24 @@ bool LimitChecker(const std::vector<UsuarioVIP> & VIPs);
  * @brief: comprueba si existe el ficher
  * @return: true si existe, false en caso contrario
  */
-bool FileExists(const std::string & fileName="./UsuariosVIP.txt");
+bool FileExists(const std::string & fileName="./UsuariosVIP.cuvc");
 
 /**
  * @brief: devuelve el tamaño del archivo pasado
  */
 
-std::ifstream::pos_type FileSize(const std::string & filename="./UsuariosVIP.txt");
+std::ifstream::pos_type FileSize(const std::string & filename="./UsuariosVIP.cuvc");
 /**
  * @brief: guarda los datos de los usuarios en un archivo de texto
  * @return: 
  */
-bool SaveFile(const std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo="./UsuariosVIP.txt");
+bool SaveFile(const std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo="./UsuariosVIP.cuvc");
 
 /**
  * @brief: recupera los datos de los usuarios a partir del archivo proporcionado
  * @return: 
  */
-bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo="./UsuariosVIP.txt");
+bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo="./UsuariosVIP.cuvc");
 
 ////////////////////////////////////////////////////////////////////
 std::tm getLocalTime();

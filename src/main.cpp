@@ -56,11 +56,6 @@ BOOL CtrlHandler( 	DWORD fdwCtrlType,
 int main(){
     //if( SetConsoleCtrlHandler( (PHANDLER_ROUTINE) CtrlHandler, TRUE ) )
 	{ 
-		printf( "\nThe Control Handler is installed.\n" ); 
-		printf( "\n -- Now try pressing Ctrl+C or Ctrl+Break, or" ); 
-		printf( "\n    try logging off or closing the console...\n" ); 
-		printf( "\n(...waiting in a loop for events...)\n\n" ); 
-
 		//Recuperción de Usuarios
 		vector<UsuarioVIP> VIPs;
 
@@ -73,8 +68,9 @@ int main(){
 		while (true){
 			DisplayUsers(VIPs);
 			
-			cout << "1) Añadir Usuario" << endl;
-			cout << "2) Salir" << endl;
+			cout << "  1) Añadir Usuario" << endl;
+			cout << "  2) Eliminar usuario manualmente"<<endl;
+			cout << "  3) Salir" << endl;
 			cin >> opcion;
 			
 			switch(opcion){
@@ -82,29 +78,41 @@ int main(){
 					string user;
 					int suscripcion;
 
-					cout <<"Nombre del usuario: ";
+					cout <<"\tNombre del usuario: ";
 					cin >>user;
 
-					cout <<endl<<"Tipo de suscripción: ";
+					cout <<"\tTipo de suscripción: ";
 					cin >>suscripcion;
-
-					if(suscripcion < 0){
-						cerr << "Suscripcion Imposible";
-					}
 
 					UsuarioVIP nuevo_usuario(user, suscripcion);
 
 					if(AnadirUsuarioVIP(VIPs, nuevo_usuario))
-						cout <<"Usuario añadido correctamente\n";
+						cout <<"\nUsuario añadido correctamente\n";
 					else
-						cerr <<"No se ha podudo añadir el usuario\n";
+						cerr <<"\nNo se ha podudo añadir el usuario\n";
 				}
 					break;
-
 				case 2:{
+					cout <<"\tIntroduce el número o el nombre del usuario a eliminar: ";
+					string opcion;
+
+					cin >>opcion;
+
+					bool checker;
+					if (stoi(opcion) > 0 && stoi(opcion) <= VIPs.size())
+						checker = EliminarUsuarioVIP(VIPs, stoi(opcion));
+					else
+						checker = EliminarUsuarioVIP(VIPs, opcion);
+
+					if (checker)
+						cout <<"\nUsuario eliminado correctamente\n";
+					else
+						cout <<"\nNo se ha podido eliminar el usuario\n";
+				}
+					break;
+				case 3:{
 					if (VIPs.size() != 0)
 						SaveFile(VIPs);
-					
 					return 0;
 				}
 
