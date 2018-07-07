@@ -7,43 +7,38 @@ using namespace std;
 
 //TODO: Comprobar que los usuarios no se pasen del día
 
-//FIXME:
-bool AnadirUsuarioVIP(UsuarioVIP * VIPs, int dim, UsuarioVIP nuevo_usuario){
-    cout <<"Función Añadir";
-    
-    if (VIPs == nullptr){
-        dim++;
-        ReservarMemoria(VIPs, dim);
+bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP nuevo_usuario){    
+    if (nuevo_usuario.GetTipoSuscripcion() != 1 && nuevo_usuario.GetTipoSuscripcion() != 3){
+        cerr <<"El tipo de suscripción no está disponible según tu plan (1 ó 3 meses)\n";
+        return false;
     }
-    else
-        AmpliarMemoria(1, VIPs, dim);
-        
-    //VIPs[dim-1] = nuevo_usuario;
-    
-    return true;    
-}
 
-bool EliminarUsuarioVIP(UsuarioVIP * VIPs, int dim, std::string usuario){
-    UsuarioVIP * temporal = new UsuarioVIP [dim-1];
+    if (nuevo_usuario.GetName() == ""){
+        cerr <<"El nombre del usuario no puede estar vacío\n";
+        return false;
+    }
 
-    unsigned int iterador_temp = 0;
-    
-    for (unsigned int i; i<dim; i++)
-        if (VIPs[i].GetName() != usuario){
-            temporal[iterador_temp] = VIPs[i];
-            iterador_temp++;
-        }
-    
-    dim--;
-    delete [] VIPs;
-
-    VIPs = temporal;
-
+    VIPs.push_back(nuevo_usuario);
     return true;
 }
 
-void DisplayUsers(UsuarioVIP * VIPs, int dim){
-    if (VIPs != nullptr){
+bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, const std::string usuario){ 
+   if (usuario == ""){
+        cerr <<"El usuario a eliminar no debe tener un nombre vacío\n";
+        return false;
+    }
+
+    for (int i; i<VIPs.size(); i++)
+        if (VIPs[i].GetName() == usuario){
+            VIPs.erase(VIPs.begin() + i);
+            break;
+        }
+    
+    return true;
+}
+
+void DisplayUsers(const std::vector<UsuarioVIP> & VIPs){
+    if (VIPs.size() != 0){
         cout <<setw(30)<<left<<setfill(' ')<<"Usuario"<<"Suscripcion         ";  
         cout <<"Fecha"<<endl;
 
@@ -51,7 +46,7 @@ void DisplayUsers(UsuarioVIP * VIPs, int dim){
         cout.fill('-');
         cout<<"-"<<endl;
 
-        for (int i=0; i<dim; i++){
+        for (int i=0; i<VIPs.size(); i++){
             cout <<setw(30)<<left<<setfill(' ')<<VIPs[i].GetName()<<"     "<<VIPs[i].GetTipoSuscripcion()<<"            ";
             cout <<right<<VIPs[i].GetFechaLimite().tm_mday<<"/"
                         <<VIPs[i].GetFechaLimite().tm_mon <<"/"
@@ -62,63 +57,28 @@ void DisplayUsers(UsuarioVIP * VIPs, int dim){
         cout << endl << "No hay usuarios almacenados en la base de datos"<< endl;
 }
 
-bool LimitChecker(UsuarioVIP * VIPs, int dim){
-    if (VIPs == nullptr)
-        return false;
+bool LimitChecker(const std::vector<UsuarioVIP> & VIPs){
     
-    for (unsigned int i=0; i < dim; i++){
-        if (VIPs[i].GetFechaLimite() > getLocalTime())
-            cout <<"FIXME";
-
-    }
-
-    return true;
-}
-////////////////////////////////////////////////////////////////////
-//FIXME:
-void AmpliarMemoria(int ampliacion, UsuarioVIP * VIPs, int dim){
-    if (ampliacion <= 0){
-        throw out_of_range("Aumento negativo o nulo imposible");
-    }
-
-    UsuarioVIP * temporal = new UsuarioVIP [dim + ampliacion];
-
-    if (VIPs != nullptr){
-        for (unsigned int i; i<dim; i++)
-            temporal[i] = VIPs[i];
-        
-        delete [] VIPs;
-    }
-
-    dim += ampliacion;
-
-    VIPs = temporal;
-}
-//FIXME:
-void ReservarMemoria(UsuarioVIP * VIPs, int dim){
-    if (dim <= 0)
-        throw out_of_range("Reserva de memoria menor o igual a 0");
-    if (VIPs != nullptr)
-        throw out_of_range("Reserva de memoria con puntero != nulo ");
-
-    VIPs = new UsuarioVIP [dim];
 }
 
 ////////////////////////////////////////////////////////////////////
-bool FileExists(const std::string fileName){
+bool FileExists(const std::string & fileName){
     ifstream infile(fileName);
     return infile.good();
 }
 
-bool SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomArchivo){
+ifstream::pos_type FileSize(const string & filename){
+    std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+    return in.tellg(); 
+}
+
+bool SaveFile(const std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo){
     ofstream fichero;
 
     fichero.open(nomArchivo);
 
     if (fichero){
-        fichero << dim;
-
-        for (unsigned int i=0; i<dim; i++)
+        for (unsigned int i=0; i<VIPs.size(); i++)
             fichero <<VIPs[i].toCSV();
 
         fichero.close();
@@ -128,31 +88,23 @@ bool SaveFile(const UsuarioVIP * VIPs, const unsigned int dim, const string nomA
         throw std::runtime_error("El fichero no se ha podido abrir");
 }
 
-ifstream::pos_type FileSize(string filename){
-    std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
-    return in.tellg(); 
-}
 
-//TODO: La devolución la has puesto como entera a posta, o ha sido un error?
-bool LoadFile(UsuarioVIP * VIPs, unsigned int & dim, const string nomArchivo){
+//FIXME: No recupera el último usuario
+bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo){
     ifstream fichero;
     string linea;
     
     fichero.open(nomArchivo.c_str());
-    
-    if(fichero.good()){
-        fichero >> dim;
-        
-        ReservarMemoria(VIPs, dim);
+    UsuarioVIP nuevo_usuario;
 
-        for(int i = 0; i < dim; i++){
+    if(fichero.good()){
+        for(int i = 0; i < !fichero.eof(); i++){
             getline(fichero, linea);
-            
-            if(fichero.eof()) 
-                break;
-            
-            VIPs[i].fromCSV(linea);
+            nuevo_usuario.fromCSV(linea);
+
+            VIPs.push_back(nuevo_usuario);
         }
+
         fichero.close();
         return true;
     }

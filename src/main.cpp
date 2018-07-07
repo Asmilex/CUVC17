@@ -62,17 +62,16 @@ int main(){
 		printf( "\n(...waiting in a loop for events...)\n\n" ); 
 
 		//Recuperción de Usuarios
-		UsuarioVIP * VIPs = nullptr;
-		unsigned int dim = 0;
+		vector<UsuarioVIP> VIPs;
 
 		// Tamaño > 0 para evitar crasheos por si el archivo estuviera vacío 
 		if (FileExists() && FileSize() > 0){
-			LoadFile(VIPs, dim);
+			LoadFile(VIPs);
 		}
 
 		int opcion;    
 		while (true){
-			DisplayUsers(VIPs, dim);
+			DisplayUsers(VIPs);
 			
 			cout << "1) Añadir Usuario" << endl;
 			cout << "2) Salir" << endl;
@@ -95,7 +94,7 @@ int main(){
 
 					UsuarioVIP nuevo_usuario(user, suscripcion);
 
-					if(AnadirUsuarioVIP(VIPs, dim, nuevo_usuario))
+					if(AnadirUsuarioVIP(VIPs, nuevo_usuario))
 						cout <<"Usuario añadido correctamente\n";
 					else
 						cerr <<"No se ha podudo añadir el usuario\n";
@@ -103,10 +102,9 @@ int main(){
 					break;
 
 				case 2:{
-					if (VIPs != nullptr){
-						SaveFile(VIPs, dim);
-						delete [] VIPs;
-					}
+					if (VIPs.size() != 0)
+						SaveFile(VIPs);
+					
 					return 0;
 				}
 
