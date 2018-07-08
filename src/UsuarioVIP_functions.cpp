@@ -75,8 +75,47 @@ void ClearScreen(){
     cout << string(100, '\n');
 }
 
-bool LimitChecker(const std::vector<UsuarioVIP> & VIPs){
-    
+bool AutoEliminador(std::vector<UsuarioVIP> & VIPs){
+    bool mensaje_bienvenida = true;
+
+    for (int i=0; i<VIPs.size(); i++){
+        if (VIPs[i].GetFechaLimite() > getLocalTime()){
+            if (mensaje_bienvenida){
+                cout <<"A los siguientes usuarios se les ha pasado su periodo VIP:" <<endl;
+                mensaje_bienvenida = false;
+            }
+            
+            cout <<VIPs[i].GetName() << " - " << VIPs[i].GetFechaLimite().tm_mday<<"/" <<VIPs[i].GetFechaLimite().tm_mon <<"/"
+            <<VIPs[i].GetFechaLimite().tm_year<<endl;
+        }        
+    }
+
+    if (mensaje_bienvenida){
+        cout <<"Todos los usuarios tienen sus suscripciones en orden. "<<endl;
+        return false;
+    }
+    else{
+        cout <<"¿Quieres eliminar automáticamente a dichos usuarios? (y/n)";
+
+        char respuesta;
+        do{
+            cin >>respuesta;
+        }while (respuesta != 'y' || respuesta != 'Y' || respuesta != 'n' || respuesta != 'N');
+        
+        if (respuesta == 'y' || respuesta == 'Y'){
+            for (int i=0; i < VIPs.size(); i++)
+                if (VIPs[i].GetFechaLimite() > getLocalTime())
+                    VIPs.erase(VIPs.begin() + i);
+            
+            cout << "Se han eliminado los usuarios anteriores"<<endl;
+            return true;
+
+        }
+        else{
+            cout <<"No se han eliminado los usuarios" <<endl;
+            return false;
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////

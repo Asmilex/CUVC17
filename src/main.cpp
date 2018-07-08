@@ -64,6 +64,10 @@ int main(){
 			LoadFile(VIPs);
 		}
 
+	    cout <<"Bienvenido, admin." <<endl;
+		if (VIPs.size() != 0)
+			AutoEliminador(VIPs);
+
 		int opcion;    
 		while (true){
 			DisplayUsers(VIPs);

@@ -31,8 +31,9 @@ void ClearScreen();
 /**
  * @brief: comprueba qué usuarios se han pasado de su fecha límite
  * Los que se hayan pasado, mueren
+ * @return: si se han borrado usuarios
  */
-bool LimitChecker(const std::vector<UsuarioVIP> & VIPs);
+bool AutoEliminador(std::vector<UsuarioVIP> & VIPs);
 
 ////////////////////////////////////////////////////////////////////
 /**
