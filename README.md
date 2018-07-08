@@ -1,10 +1,14 @@
 # Controlador de Usuarios VIP de Comunidad 17 (CUVC17)
 
 ## Dependencias:
+### Building
 - `Cmake`
-- `MinGW`, añadido a `PATH`
+- (Windows only)`MinGW`, añadido a `PATH`
 
 ## Instrucciones para compilar 
-Disponible ahora mismo únicamente para Windows, debido a las funciones que usamos para detectar cuándo se cierra el diálogo.
+## Windows:
 1. `cmake . -G "MinGW Makefiles"`
 2. `make`
+## Linux: 
+1. cmake 
+2. make
