@@ -97,18 +97,12 @@ int main(){
 				}
 					break;
 				case 2:{
-					cout <<"\tIntroduce el número o el nombre del usuario a eliminar: ";
-					string opcion;
+					int opcion;
 
+					cout <<"\tIntroduce el número del usuario a eliminar: ";
 					cin >>opcion;
 
-					bool checker;
-					if (stoi(opcion) > 0 && stoi(opcion) <= VIPs.size())
-						checker = EliminarUsuarioVIP(VIPs, stoi(opcion));
-					else
-						checker = EliminarUsuarioVIP(VIPs, opcion);
-
-					if (checker)
+					if (opcion > 0 && opcion <= VIPs.size() && EliminarUsuarioVIP(VIPs, opcion))
 						cout <<"\nUsuario eliminado correctamente\n";
 					else
 						cout <<"\nNo se ha podido eliminar el usuario\n";
@@ -122,9 +116,8 @@ int main(){
 
 				default:{
 					do{
-						cout <<"Pulsa la tecla correcta, mamón"<<endl;
+						cout <<"Pulsa la tecla correcta, mamón: ";
 						cin >>opcion;
-
 					} while (opcion != 1 || opcion != 2);
 				}
 					break;
