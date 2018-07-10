@@ -73,11 +73,11 @@ int main(){
 		while (true){
 			DisplayUsers(VIPs);
 			
-			cout << "  1) Añadir Usuario" << endl;
-			cout << "  2) Eliminar usuario manualmente"<<endl;
-			cout << "  3) Ordenar por nombre"<<endl;
-			cout << "  4) Ordenar por fecha"<<endl;
-			cout << "  5) Salir" << endl;
+			cout << "   1) Añadir Usuario" << endl;
+			cout << "   2) Eliminar usuario manualmente"<<endl;
+			cout << "   3) Ordenar por nombre"<<endl;
+			cout << "   4) Ordenar por fecha"<<endl;
+			cout << "   5) Salir" << endl;
 			cin >> opcion;
 			
 			switch(opcion){
@@ -85,10 +85,10 @@ int main(){
 					string user;
 					int suscripcion;
 
-					cout <<"\tNombre del usuario: ";
+					cout <<"   Nombre del usuario: ";
 					cin >>user;
 
-					cout <<"\tTipo de suscripción: ";
+					cout <<"   Tipo de suscripción: ";
 					cin >>suscripcion;
 
 					UsuarioVIP nuevo_usuario(user, suscripcion);
@@ -102,7 +102,7 @@ int main(){
 				case 2:{
 					int opcion;
 
-					cout <<"\tIntroduce el número del usuario a eliminar: ";
+					cout <<"   Introduce el número del usuario a eliminar: ";
 					cin >>opcion;
 
 					if (opcion > 0 && opcion <= VIPs.size() && EliminarUsuarioVIP(VIPs, opcion))
