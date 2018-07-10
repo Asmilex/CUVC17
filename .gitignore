@@ -52,5 +52,7 @@ CTestTestfile.cmake
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Custom 
+UsuariosVIP.cuvc
 
 # End of https://www.gitignore.io/api/c++,cmake,visualstudiocode
