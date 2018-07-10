@@ -4,6 +4,7 @@
 #include "UsuarioVIP.h"
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 /**
  * @brief: Añade un UsuarioVIP a la lista de activos
@@ -62,11 +63,31 @@ bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo="./
 ////////////////////////////////////////////////////////////////////
 std::tm getLocalTime();
 
+/**
+ * @brief coge una fecha y la convierte a una estructura del tipo YYYYMMDD (Year - Month - Day)
+ * @return codificación
+ */
+long int tm_to_int(const tm fecha);
+
+// Operator overloading. Bastante lógico lo que hacen
 bool operator==(const tm & fecha1,const tm & fecha2);	
 bool operator!=(const tm & fecha1,const tm & fecha2);
 bool operator> (const tm & fecha1,const tm & fecha2);
 bool operator>=(const tm & fecha1,const tm & fecha2);
 bool operator< (const tm & fecha1,const tm & fecha2);
 bool operator<=(const tm & fecha1,const tm & fecha2);
+
+////////////////////////////////////////////////////////////////////
+/**
+ * @brief: Indica si el primer string recibido es menor que el segundo
+ * @return true si primero < segundo, else false
+ */
+bool sortByName(const UsuarioVIP &lhs, const UsuarioVIP &rhs);
+
+/**
+ * @brief: Indica si la primera fecha recibida es menor que la segunda
+ * @return true si primero < segundo, else false
+ */
+bool sortByDate(const UsuarioVIP &lhs, const UsuarioVIP &rhs);
 
 #endif

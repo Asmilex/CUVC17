@@ -1,6 +1,7 @@
 #include "UsuarioVIP_functions.h"
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 //#include <windows.h>
 #include <stdio.h>
 
@@ -74,7 +75,9 @@ int main(){
 			
 			cout << "  1) Añadir Usuario" << endl;
 			cout << "  2) Eliminar usuario manualmente"<<endl;
-			cout << "  3) Salir" << endl;
+			cout << "  3) Ordenar por nombre"<<endl;
+			cout << "  4) Ordenar por fecha"<<endl;
+			cout << "  5) Salir" << endl;
 			cin >> opcion;
 			
 			switch(opcion){
@@ -94,8 +97,8 @@ int main(){
 						cout <<"\nUsuario añadido correctamente\n";
 					else
 						cerr <<"\nNo se ha podudo añadir el usuario\n";
-				}
-					break;
+				} break;
+				
 				case 2:{
 					int opcion;
 
@@ -106,19 +109,25 @@ int main(){
 						cout <<"\nUsuario eliminado correctamente\n";
 					else
 						cout <<"\nNo se ha podido eliminar el usuario\n";
-				}
-					break;
+				} break;
+				
 				case 3:{
+					sort(VIPs.begin(), VIPs.end(), sortByName);
+				} break;
+				
+				case 4:{
+					sort(VIPs.begin(), VIPs.end(), sortByDate);
+				} break;
+
+				case 5:{
 					if (VIPs.size() != 0)
 						SaveFile(VIPs);
 					return 0;
 				}
 
 				default:{
-					do{
 						cout <<"Pulsa la tecla correcta, mamón: ";
 						cin >>opcion;
-					} while (opcion != 1 || opcion != 2);
 				}
 					break;
 			}

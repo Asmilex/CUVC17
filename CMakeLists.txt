@@ -7,7 +7,7 @@ cmake_minimum_required (VERSION 2.6)
 #Flags
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
-
+SET (CMAKE_CXX_STANDARD 11)
 #Para construir el ejecutable para debuggear:
 #cmake -DCMAKE_BUILD_TYPE=Debug
 

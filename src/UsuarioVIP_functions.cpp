@@ -77,15 +77,16 @@ void ClearScreen(){
 
 bool AutoEliminador(std::vector<UsuarioVIP> & VIPs){
     bool mensaje_bienvenida = true;
+    tm now = getLocalTime();
 
     for (int i=0; i<VIPs.size(); i++){
-        if (VIPs[i].GetFechaLimite() > getLocalTime()){
+        if (now > VIPs[i].GetFechaLimite()){
             if (mensaje_bienvenida){
                 cout <<"A los siguientes usuarios se les ha pasado su periodo VIP:" <<endl;
                 mensaje_bienvenida = false;
             }
             
-            cout <<VIPs[i].GetName() << " - " << VIPs[i].GetFechaLimite().tm_mday<<"/" <<VIPs[i].GetFechaLimite().tm_mon <<"/"
+            cout <<"\t"<<VIPs[i].GetName() << " - " << VIPs[i].GetFechaLimite().tm_mday<<"/" <<VIPs[i].GetFechaLimite().tm_mon <<"/"
             <<VIPs[i].GetFechaLimite().tm_year<<endl;
         }        
     }
@@ -95,18 +96,21 @@ bool AutoEliminador(std::vector<UsuarioVIP> & VIPs){
         return false;
     }
     else{
-        cout <<"¿Quieres eliminar automáticamente a dichos usuarios? (y/n)";
+        cout <<"¿Quieres eliminar automáticamente a dichos usuarios? (Y/n): ";
 
         char respuesta;
         do{
             cin >>respuesta;
-        }while (respuesta != 'y' || respuesta != 'Y' || respuesta != 'n' || respuesta != 'N');
+        }while (respuesta != 'y' && respuesta != 'Y' && respuesta != 'n' && respuesta != 'N');
         
         if (respuesta == 'y' || respuesta == 'Y'){
-            for (int i=0; i < VIPs.size(); i++)
-                if (VIPs[i].GetFechaLimite() > getLocalTime())
-                    VIPs.erase(VIPs.begin() + i);
-            
+
+            for (int i=0; i < VIPs.size(); i++){
+                if (now > VIPs[i].GetFechaLimite()){
+                    EliminarUsuarioVIP(VIPs,i+1);
+                    --i;
+                }
+            }
             cout << "Se han eliminado los usuarios anteriores"<<endl;
             return true;
 
@@ -155,11 +159,13 @@ bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo){
     UsuarioVIP nuevo_usuario;
 
     if(fichero.good()){
-        for(int i = 0; i < !fichero.eof(); i++){
+        while (!fichero.eof()){
             getline(fichero, linea);
-            nuevo_usuario.fromCSV(linea);
 
-            VIPs.push_back(nuevo_usuario);
+            if (!fichero.eof()){
+                nuevo_usuario.fromCSV(linea);
+                VIPs.push_back(nuevo_usuario);
+            }
         }
 
         fichero.close();
@@ -184,68 +190,67 @@ tm getLocalTime(){
     return copy;
 }
 
+long int tm_to_int(const tm fecha){
+    return fecha.tm_year * 10000 + fecha.tm_mon * 100 + fecha.tm_mday; 
+}
+//FIXME: Los operadores <, >, <= y >= están mal
 bool operator==(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year == fecha2.tm_year && 
         fecha1.tm_mon  == fecha2.tm_mon  &&
         fecha1.tm_mday == fecha2.tm_mday)
-        
         return true;
     else
         return false;
-
 }
 
 bool operator!=(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year == fecha2.tm_year && 
         fecha1.tm_mon  == fecha2.tm_mon  &&
         fecha1.tm_mday == fecha2.tm_mday)
-        
         return false;
     else
         return true;
 }
 
-bool operator>(const tm & fecha1,const tm & fecha2){
-    if (fecha1.tm_year <= fecha2.tm_year)
-        return false;
-    else if (fecha1.tm_mon <= fecha2.tm_mon)
-        return false;
-    else if (fecha1.tm_mday <= fecha2.tm_mday)
-        return false;
-    else
+bool operator>(const tm & fecha1, const tm & fecha2){
+    if (tm_to_int(fecha1) > tm_to_int(fecha2))
         return true;
+    else
+        return false;
 }
 
 bool operator>=(const tm & fecha1,const tm & fecha2){
-    if (fecha1.tm_year < fecha2.tm_year)
-        return false;
-    else if (fecha1.tm_mon < fecha2.tm_mon)
-        return false;
-    else if (fecha1.tm_mday < fecha2.tm_mday)
-        return false;
-    else
+    if (tm_to_int(fecha1) >= tm_to_int(fecha2))
         return true;
+    else
+        return false;
 }
 
 bool operator<(const tm & fecha1,const tm & fecha2){
-    if (fecha1.tm_year >= fecha2.tm_year)
-        return false;
-    else if (fecha1.tm_mon >= fecha2.tm_mon)
-        return false;
-    else if (fecha1.tm_mday >= fecha2.tm_mday)
-        return false;
-    else
+    if (tm_to_int(fecha1) < tm_to_int(fecha2))
         return true;
-
+    else
+        return false;
 }
 
 bool operator<=(const tm & fecha1,const tm & fecha2){
-    if (fecha1.tm_year > fecha2.tm_year)
-        return false;
-    else if (fecha1.tm_mon > fecha2.tm_mon)
-        return false;
-    else if (fecha1.tm_mday > fecha2.tm_mday)
-        return false;
-    else
+    if (tm_to_int(fecha1) <= tm_to_int(fecha2))
         return true;
+    else
+        return false;
+}
+
+
+bool sortByName(const UsuarioVIP &lhs, const UsuarioVIP &rhs){
+    string primero = lhs.GetName();
+    string segundo = rhs.GetName();
+    
+    for (auto & c: primero) c = toupper(c);
+    for (auto & c: segundo) c = toupper(c);
+    
+    return primero < segundo;
+}
+
+bool sortByDate(const UsuarioVIP &lhs, const UsuarioVIP &rhs){
+    return tm_to_int(lhs.GetFechaLimite()) < tm_to_int(rhs.GetFechaLimite());
 }
