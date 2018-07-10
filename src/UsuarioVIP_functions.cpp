@@ -1,10 +1,6 @@
 #include "UsuarioVIP_functions.h"
-#include <fstream>
-#include <iostream>
-#include <iomanip> //flags para cout
 using namespace std;
 
-//TODO: Comprobar que los usuarios no se pasen del día
 bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP nuevo_usuario){    
     if (nuevo_usuario.GetTipoSuscripcion() != 1 && nuevo_usuario.GetTipoSuscripcion() != 3){
         cerr <<"El tipo de suscripción no está disponible según tu plan (1 ó 3 meses)\n";
@@ -149,8 +145,6 @@ bool SaveFile(const std::vector<UsuarioVIP> & VIPs, const std::string & nomArchi
         throw std::runtime_error("El fichero no se ha podido abrir");
 }
 
-
-//FIXME: No recupera el último usuario
 bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo){
     ifstream fichero;
     string linea;
@@ -172,7 +166,6 @@ bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo){
         return true;
     }
     else
-        //TODO: Manejo de errores
         throw runtime_error("El fichero no se ha podido abrir");
 }
 
@@ -193,7 +186,7 @@ tm getLocalTime(){
 long int tm_to_int(const tm fecha){
     return fecha.tm_year * 10000 + fecha.tm_mon * 100 + fecha.tm_mday; 
 }
-//FIXME: Los operadores <, >, <= y >= están mal
+
 bool operator==(const tm & fecha1,const tm & fecha2){
     if (fecha1.tm_year == fecha2.tm_year && 
         fecha1.tm_mon  == fecha2.tm_mon  &&

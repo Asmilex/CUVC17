@@ -2,9 +2,11 @@
 #define VIP_C17_functions
 
 #include "UsuarioVIP.h"
-#include <fstream>
-#include <vector>
 #include <algorithm>
+#include <fstream>
+#include <iomanip> //flags para cout
+#include <iostream>
+#include <vector>
 
 /**
  * @brief: Añade un UsuarioVIP a la lista de activos

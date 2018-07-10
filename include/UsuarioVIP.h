@@ -1,6 +1,8 @@
 #ifndef VIP_C17
 #define VIP_C17
 
+#include <sstream>
+#include <iostream>
 #include <string>
 #include <ctime>
 
@@ -70,14 +72,11 @@ public:
     
     /**
      * @brief: Recupera datos en formato CSV
-     * 
      */
     void fromCSV(const std::string &cadena);
 
 	////////////////////////////////////////////////////////////////////
-
 	UsuarioVIP& operator=(const UsuarioVIP & nuevo_usuario);
-
 };
 
 #endif
