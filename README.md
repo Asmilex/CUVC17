@@ -10,5 +10,5 @@
 1. `cmake . -G "MinGW Makefiles"`
 2. `make`
 ## Linux: 
-1. cmake 
-2. make
+1. `cmake` 
+2. `make`
