@@ -7,6 +7,7 @@
 
 ## Instrucciones para compilar 
 ## Windows:
+0. Edita el archivo CMakeLists.txt, quitándole la almohadilla `#` en las líneas 4 y 5
 1. `cmake . -G "MinGW Makefiles"`
 2. `make`
 ## Linux: 
