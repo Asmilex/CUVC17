@@ -79,11 +79,6 @@ int main(){
 					SaveFile(VIPs);
 				return 0;
 			}
-				
-			default:{
-					cout <<"Pulsa la tecla correcta, mamón: ";
-					cin >>opcion;
-			} break;
 		}
 	}
 }
