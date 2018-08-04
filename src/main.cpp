@@ -54,12 +54,13 @@ int main(){
 				cout <<"   Introduce el número del usuario a eliminar: ";
 				cin >>opcion;
 
-				if (opcion > 0 && opcion <= VIPs.size() && EliminarUsuarioVIP(VIPs, opcion))
+				if (opcion > 0 && opcion <= VIPs.size() && EliminarUsuarioVIP(VIPs, opcion)){
 					cout <<"\nUsuario eliminado correctamente\n";
+					SaveFile(VIPs);
+				}
 				else
 					cout <<"\nNo se ha podido eliminar el usuario\n";
 				
-				SaveFile(VIPs);
 			} break;
 			case 3:{
 				sort(VIPs.begin(), VIPs.end(), sortByName);
