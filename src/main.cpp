@@ -1,19 +1,16 @@
 #include "UsuarioVIP_functions.h"
-#include <iostream>
 #include <fstream>
 #include <algorithm>
-#include <stdio.h>
 
 using namespace std;
 
 int main(){
-	//Recuperción de Usuarios
+	// Recuperción de Usuarios
 	vector<UsuarioVIP> VIPs;
 
-	// Tamaño > 0 para evitar crasheos por si el archivo estuviera vacío 
-	if (FileExists() && FileSize() > 0){
+	if (FileExists() && FileSize() > 0)
 		LoadFile(VIPs);
-	}
+	// Fin de recuperación de datos 
 
 	cout <<"Bienvenido, admin." <<endl;
 	if (VIPs.size() != 0)
@@ -28,27 +25,27 @@ int main(){
 		cout << "   3) Ordenar por nombre"<<endl;
 		cout << "   4) Ordenar por fecha"<<endl;
 		cout << "   5) Salir" << endl;
-		cin >> opcion;
+		cin  >> opcion;
 
 		switch(opcion){
 			case 1:{
 				string user;
 				int suscripcion;
 
-				cout <<"   Nombre del usuario: ";
-				cin >>user;
+				cout << "   Nombre del usuario: ";
+				cin  >> user;
 
-				cout <<"   Tipo de suscripción: ";
-				cin >>suscripcion;
+				cout << "   Tipo de suscripción: ";
+				cin  >> suscripcion;
 
 				UsuarioVIP nuevo_usuario(user, suscripcion);
 
-				if(AnadirUsuarioVIP(VIPs, nuevo_usuario))
-					cout <<"\nUsuario añadido correctamente\n";
+				if(AnadirUsuarioVIP(VIPs, nuevo_usuario)){
+					cout << "\nUsuario añadido correctamente\n";
+					SaveFile(VIPs);
+				}
 				else
-					cerr <<"\nNo se ha podudo añadir el usuario\n";
-				
-				SaveFile(VIPs);
+					cerr << "\nNo se ha podudo añadir el usuario\n";
 			} break;
 
 			case 2:{
