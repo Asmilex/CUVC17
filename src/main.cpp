@@ -40,7 +40,7 @@ int main(){
 
 				UsuarioVIP nuevo_usuario(user, suscripcion);
 
-				if(AnadirUsuarioVIP(VIPs, nuevo_usuario)){
+				if (AnadirUsuarioVIP(VIPs, nuevo_usuario)){
 					cout << "\nUsuario añadido correctamente\n";
 					SaveFile(VIPs);
 				}
@@ -51,8 +51,8 @@ int main(){
 			case 2:{
 				int opcion;
 
-				cout <<"   Introduce el número del usuario a eliminar: ";
-				cin >>opcion;
+				cout << "   Introduce el número del usuario a eliminar: ";
+				cin  >> opcion;
 
 				if (opcion > 0 && opcion <= VIPs.size() && EliminarUsuarioVIP(VIPs, opcion)){
 					cout <<"\nUsuario eliminado correctamente\n";
@@ -60,8 +60,8 @@ int main(){
 				}
 				else
 					cout <<"\nNo se ha podido eliminar el usuario\n";
-				
 			} break;
+			
 			case 3:{
 				sort(VIPs.begin(), VIPs.end(), sortByName);
 				SaveFile(VIPs);

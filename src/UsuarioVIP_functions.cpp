@@ -1,7 +1,8 @@
 #include "UsuarioVIP_functions.h"
 using namespace std;
 
-bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP nuevo_usuario){    
+bool AnadirUsuarioVIP(vector<UsuarioVIP> & VIPs, const UsuarioVIP & nuevo_usuario){    
+    // FIXME: Mejorar manejo de errores. No se deben incluir entradas/salidas junto a operaciones
     if (nuevo_usuario.GetTipoSuscripcion() != 1 && nuevo_usuario.GetTipoSuscripcion() != 3){
         cerr <<"El tipo de suscripción no está disponible según tu plan (1 ó 3 meses)\n";
         return false;
@@ -16,13 +17,14 @@ bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP nuevo_usua
     return true;
 }
 
-bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, const std::string usuario){ 
+// Unused function
+bool EliminarUsuarioVIP(vector<UsuarioVIP> & VIPs, const string usuario){ 
    if (usuario == ""){
         cerr <<"El usuario a eliminar no debe tener un nombre vacío\n";
         return false;
     }
 
-    for (int i; i<VIPs.size(); i++)
+    for (size_t i; i<VIPs.size(); i++)
         if (VIPs[i].GetName() == usuario){
             VIPs.erase(VIPs.begin() + i);
             break;
@@ -31,7 +33,7 @@ bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, const std::string usuari
     return true;
 }
 
-bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, int posicion){ 
+bool EliminarUsuarioVIP(vector<UsuarioVIP> & VIPs, int posicion){ 
    if (posicion <= 0 && posicion > VIPs.size()){
        throw out_of_range("Posición inválida");
     }
@@ -41,7 +43,7 @@ bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, int posicion){
     return true;
 }
 
-void DisplayUsers(const std::vector<UsuarioVIP> & VIPs){
+void DisplayUsers(const vector<UsuarioVIP> & VIPs){
     cout <<"\n\n\n\n";
     if (VIPs.size() != 0){
         cout <<setw(33)<<left<<setfill(' ')<<"   Usuario"<<"Suscripcion         ";  
@@ -51,7 +53,7 @@ void DisplayUsers(const std::vector<UsuarioVIP> & VIPs){
         cout.fill('-');
         cout<<"-"<<endl;
 
-        for (int i=0; i<VIPs.size(); i++){
+        for (size_t i=0; i<VIPs.size(); i++){
             cout <<i+1<<"- ";
             cout <<setw(30)<<left<<setfill(' ')<<VIPs[i].GetName()<<"     "<<VIPs[i].GetTipoSuscripcion()<<"               ";
             cout <<right<<VIPs[i].GetFechaLimite().tm_mday<<"/"
@@ -67,51 +69,55 @@ void DisplayUsers(const std::vector<UsuarioVIP> & VIPs){
         cout << endl << "No hay usuarios almacenados en la base de datos"<< endl;
 }
 
+// Unused function
 void ClearScreen(){
     cout << string(100, '\n');
 }
 
-bool AutoEliminador(std::vector<UsuarioVIP> & VIPs){
+bool AutoEliminador(vector<UsuarioVIP> & VIPs){
+    // Comprobación de usuarios
     bool mensaje_bienvenida = true;
     tm now = getLocalTime();
 
-    for (int i=0; i<VIPs.size(); i++){
-        if (now > VIPs[i].GetFechaLimite()){
+    for (size_t i=0; i < VIPs.size(); i++){
+        if (now > VIPs[i].GetFechaLimite() ){
             if (mensaje_bienvenida){
                 cout <<"A los siguientes usuarios se les ha pasado su periodo VIP:" <<endl;
                 mensaje_bienvenida = false;
             }
             
-            cout <<"\t"<<VIPs[i].GetName() << " - " << VIPs[i].GetFechaLimite().tm_mday<<"/" <<VIPs[i].GetFechaLimite().tm_mon <<"/"
-            <<VIPs[i].GetFechaLimite().tm_year<<endl;
+            cout <<"\t"<<VIPs[i].GetName() << " - " << VIPs[i].GetFechaLimite().tm_mday<<"/" 
+                 << VIPs[i].GetFechaLimite().tm_mon  << "/"
+                 << VIPs[i].GetFechaLimite().tm_year << endl;
         }        
     }
 
     if (mensaje_bienvenida){
         cout <<"Todos los usuarios tienen sus suscripciones en orden. "<<endl;
         return false;
-    }
-    else{
+    }       
+    else {
+        // Eliminación de usuarios
+
         cout <<"¿Quieres eliminar automáticamente a dichos usuarios? (Y/n): ";
 
         char respuesta;
-        do{
+        do {
             cin >>respuesta;
-        }while (respuesta != 'y' && respuesta != 'Y' && respuesta != 'n' && respuesta != 'N');
+        } while (respuesta != 'y' && respuesta != 'Y' && respuesta != 'n' && respuesta != 'N');
         
         if (respuesta == 'y' || respuesta == 'Y'){
 
-            for (int i=0; i < VIPs.size(); i++){
-                if (now > VIPs[i].GetFechaLimite()){
-                    EliminarUsuarioVIP(VIPs,i+1);
+            for (size_t i=0; i < VIPs.size(); i++){
+                if (now > VIPs[i].GetFechaLimite() ){
+                    EliminarUsuarioVIP(VIPs, i+1);
                     --i;
                 }
             }
             cout << "Se han eliminado los usuarios anteriores"<<endl;
             return true;
-
         }
-        else{
+        else {
             cout <<"No se han eliminado los usuarios" <<endl;
             return false;
         }
@@ -119,19 +125,18 @@ bool AutoEliminador(std::vector<UsuarioVIP> & VIPs){
 }
 
 ////////////////////////////////////////////////////////////////////
-bool FileExists(const std::string & fileName){
+bool FileExists(const string & fileName){
     ifstream infile(fileName);
     return infile.good();
 }
 
 ifstream::pos_type FileSize(const string & filename){
-    std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+    ifstream in(filename, ifstream::ate | ifstream::binary);
     return in.tellg(); 
 }
 
-bool SaveFile(const std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo){
+bool SaveFile(const vector<UsuarioVIP> & VIPs, const string & nomArchivo){
     ofstream fichero;
-
     fichero.open(nomArchivo);
 
     if (fichero){
@@ -142,10 +147,10 @@ bool SaveFile(const std::vector<UsuarioVIP> & VIPs, const std::string & nomArchi
         return true;
     }
     else
-        throw std::runtime_error("El fichero no se ha podido abrir");
+        throw runtime_error("El fichero no se ha podido abrir");
 }
 
-bool LoadFile(std::vector<UsuarioVIP> & VIPs, const std::string & nomArchivo){
+bool LoadFile(vector<UsuarioVIP> & VIPs, const string & nomArchivo){
     ifstream fichero;
     string linea;
     
@@ -179,7 +184,7 @@ tm getLocalTime(){
     now->tm_mon  += 1;
     now->tm_year += 1900;
 
-    struct tm  copy = *now;              // make a local copy.
+    struct tm copy = *now;               // make a local copy.
     return copy;
 }
 

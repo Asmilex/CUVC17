@@ -12,7 +12,7 @@
  * @brief: Añade un UsuarioVIP a la lista de activos
  * @return: true si ha funcionado, else false
  */
-bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP nuevo_usuario);
+bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP & nuevo_usuario);
 
 /**
  * @brief: Elimina un UsuarioVIP a la lista de activos
