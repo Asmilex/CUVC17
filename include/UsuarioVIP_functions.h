@@ -19,7 +19,7 @@ bool AnadirUsuarioVIP(std::vector<UsuarioVIP> & VIPs,const UsuarioVIP & nuevo_us
  * @return: true si ha funcionado, else false
  */
 bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, const std::string usuario);
-bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, int posicion);
+bool EliminarUsuarioVIP(std::vector<UsuarioVIP> & VIPs, const size_t posicion);
 
 /**
  * @brief: muestra los usuarios en pantalla

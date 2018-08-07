@@ -33,12 +33,12 @@ bool EliminarUsuarioVIP(vector<UsuarioVIP> & VIPs, const string usuario){
     return true;
 }
 
-bool EliminarUsuarioVIP(vector<UsuarioVIP> & VIPs, int posicion){ 
-   if (posicion <= 0 && posicion > VIPs.size()){
+bool EliminarUsuarioVIP(vector<UsuarioVIP> & VIPs, const size_t posicion){ 
+   if (posicion < 0 && posicion > VIPs.size()){
        throw out_of_range("Posición inválida");
     }
 
-    VIPs.erase(VIPs.begin() + (--posicion));
+    VIPs.erase(VIPs.begin() + posicion);
 
     return true;
 }

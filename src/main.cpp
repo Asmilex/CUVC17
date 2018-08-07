@@ -5,18 +5,18 @@
 using namespace std;
 
 int main(){
-	// Recuperción de Usuarios
 	vector<UsuarioVIP> VIPs;
-
+	
+	// Recuperción de Usuarios
 	if (FileExists() && FileSize() > 0)
 		LoadFile(VIPs);
-	// Fin de recuperación de datos 
 
 	cout <<"Bienvenido, admin." <<endl;
+	
 	if (VIPs.size() != 0)
 		AutoEliminador(VIPs);
 
-	int opcion;    
+	unsigned opcion;    
 	while (true){
 		DisplayUsers(VIPs);
 
@@ -30,7 +30,7 @@ int main(){
 		switch(opcion){
 			case 1:{
 				string user;
-				int suscripcion;
+				unsigned suscripcion;
 
 				cout << "   Nombre del usuario: ";
 				cin  >> user;
@@ -49,12 +49,13 @@ int main(){
 			} break;
 
 			case 2:{
-				int opcion;
+				size_t opcion;
 
 				cout << "   Introduce el número del usuario a eliminar: ";
 				cin  >> opcion;
 
-				if (opcion > 0 && opcion <= VIPs.size() && EliminarUsuarioVIP(VIPs, opcion)){
+				// Opcion: {1..n} => {0..n-1} al pasarlo a función
+				if (opcion > 0 && opcion <= VIPs.size() && EliminarUsuarioVIP(VIPs, opcion - 1)){
 					cout <<"\nUsuario eliminado correctamente\n";
 					SaveFile(VIPs);
 				}
