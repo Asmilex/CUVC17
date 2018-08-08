@@ -140,8 +140,8 @@ bool SaveFile(const vector<UsuarioVIP> & VIPs, const string & nomArchivo){
     fichero.open(nomArchivo);
 
     if (fichero){
-        for (unsigned int i=0; i<VIPs.size(); i++)
-            fichero <<VIPs[i].toCSV();
+        for (auto persona: VIPs)
+            fichero <<persona.toCSV();
 
         fichero.close();
         return true;
