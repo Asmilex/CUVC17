@@ -66,13 +66,7 @@ int main(){
 			case 3:{
 				// Lambda expression
 				auto sort_by_name = [](const UsuarioVIP &lhs, const UsuarioVIP &rhs){
-				    string primero = lhs.GetName();
-    				string segundo = rhs.GetName();
-    
-    				for (auto& c: primero) c = toupper(c);
-					for (auto& c: segundo) c = toupper(c);
-    
-    				return primero < segundo;	
+    				return str_tolower(lhs.GetName()) < str_tolower(rhs.GetName());	
 				};
 
 				sort(VIPs.begin(), VIPs.end(), sort_by_name);
@@ -80,8 +74,9 @@ int main(){
 			} break;
 
 			case 4:{
-				auto sort_by_date = [](const UsuarioVIP& lhs, const UsuarioVIP& rhs)
-					{return tm_to_int(lhs.GetFechaLimite()) < tm_to_int(rhs.GetFechaLimite() );};
+				auto sort_by_date = [](const UsuarioVIP& lhs, const UsuarioVIP& rhs) {
+					return tm_to_int(lhs.GetFechaLimite()) < tm_to_int(rhs.GetFechaLimite() );
+				};
 
 				sort(VIPs.begin(), VIPs.end(), sort_by_date);
 				SaveFile(VIPs);

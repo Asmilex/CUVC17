@@ -17,7 +17,6 @@ bool AnadirUsuarioVIP(vector<UsuarioVIP> & VIPs, const UsuarioVIP & nuevo_usuari
     return true;
 }
 
-// Unused function
 bool EliminarUsuarioVIP(vector<UsuarioVIP> & VIPs, const string usuario){ 
    if (usuario == ""){
         cerr <<"El usuario a eliminar no debe tener un nombre vacío\n";
@@ -236,4 +235,9 @@ bool operator<=(const tm & fecha1,const tm & fecha2){
         return true;
     else
         return false;
+}
+
+string str_tolower(string estrin){
+    for (auto& c: estrin) c = tolower(c);
+    return estrin;
 }

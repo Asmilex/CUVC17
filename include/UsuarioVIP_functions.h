@@ -79,4 +79,10 @@ bool operator>=(const tm & fecha1,const tm & fecha2);
 bool operator< (const tm & fecha1,const tm & fecha2);
 bool operator<=(const tm & fecha1,const tm & fecha2);
 
+/**
+ * @brief: converts string to lowercase
+ * @return: same string on lowercase
+ */
+
+std::string str_tolower(std::string estrin);
 #endif
