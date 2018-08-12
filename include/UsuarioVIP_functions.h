@@ -79,17 +79,4 @@ bool operator>=(const tm & fecha1,const tm & fecha2);
 bool operator< (const tm & fecha1,const tm & fecha2);
 bool operator<=(const tm & fecha1,const tm & fecha2);
 
-////////////////////////////////////////////////////////////////////
-/**
- * @brief: Indica si el primer string recibido es menor que el segundo
- * @return true si primero < segundo, else false
- */
-bool sortByName(const UsuarioVIP &lhs, const UsuarioVIP &rhs);
-
-/**
- * @brief: Indica si la primera fecha recibida es menor que la segunda
- * @return true si primero < segundo, else false
- */
-bool sortByDate(const UsuarioVIP &lhs, const UsuarioVIP &rhs);
-
 #endif

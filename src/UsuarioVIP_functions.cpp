@@ -237,18 +237,3 @@ bool operator<=(const tm & fecha1,const tm & fecha2){
     else
         return false;
 }
-
-
-bool sortByName(const UsuarioVIP &lhs, const UsuarioVIP &rhs){
-    string primero = lhs.GetName();
-    string segundo = rhs.GetName();
-    
-    for (auto & c: primero) c = toupper(c);
-    for (auto & c: segundo) c = toupper(c);
-    
-    return primero < segundo;
-}
-
-bool sortByDate(const UsuarioVIP &lhs, const UsuarioVIP &rhs){
-    return tm_to_int(lhs.GetFechaLimite()) < tm_to_int(rhs.GetFechaLimite());
-}

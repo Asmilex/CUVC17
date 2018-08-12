@@ -64,12 +64,26 @@ int main(){
 			} break;
 			
 			case 3:{
-				sort(VIPs.begin(), VIPs.end(), sortByName);
+				// Lambda expression
+				auto sort_by_name = [](const UsuarioVIP &lhs, const UsuarioVIP &rhs){
+				    string primero = lhs.GetName();
+    				string segundo = rhs.GetName();
+    
+    				for (auto& c: primero) c = toupper(c);
+					for (auto& c: segundo) c = toupper(c);
+    
+    				return primero < segundo;	
+				};
+
+				sort(VIPs.begin(), VIPs.end(), sort_by_name);
 				SaveFile(VIPs);
 			} break;
 
 			case 4:{
-				sort(VIPs.begin(), VIPs.end(), sortByDate);
+				auto sort_by_date = [](const UsuarioVIP& lhs, const UsuarioVIP& rhs)
+					{return tm_to_int(lhs.GetFechaLimite()) < tm_to_int(rhs.GetFechaLimite() );};
+
+				sort(VIPs.begin(), VIPs.end(), sort_by_date);
 				SaveFile(VIPs);
 			} break;
 
