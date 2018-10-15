@@ -1,7 +1,7 @@
 [Asmilex](https://github.com/Asmilex)
 - Class design & implementation 
 - `main()` implementation
-- Auxiliar funciont design & implementation 
+- Auxiliar function design & implementation 
 
 [SrAndromeda](https://github.com/SrAndromeda)
 - Class implementation 
