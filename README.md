@@ -1,5 +1,5 @@
 # Controlador de Usuarios VIP de Comunidad 17 (CUVC17)
-Base de datos extremadamente ligera escrita en C++. Añade usuarios con persmisos especiales (como VIPs en servidores) y controla la fecha de caducidad de dicho servicio. Originalmente producido para controlar la base de datos de [Comunidad 17](https://steamcommunity.com/groups/Comunidad17)
+Base de datos extremadamente ligera escrita en C++. Añade usuarios con permisos especiales (como VIPs en servidores) y controla la fecha de caducidad de dicho servicio. Originalmente producido para controlar la base de datos de [Comunidad 17](https://steamcommunity.com/groups/Comunidad17)
 ## Dependencias:
 ### Building
 - `Cmake`
